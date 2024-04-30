@@ -19,6 +19,16 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreignId('role_id')->nullable();
+
+            // $table->string('profile_photo_path', 2048)->nullable(); //copied from laravel jetsream
+
+            // coach stuff
+            $table->text('bio')->nullable();
+            // todo avatar
+            // todo language
+            // $table->string('language')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
