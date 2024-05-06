@@ -60,7 +60,6 @@ class ProfileController extends Controller
 
     public function updateAvatar(Request $request): RedirectResponse
     {
-        // Validation de l'image sans passer par une form request
         $request->validate([
             'avatar' => ['required', 'image', 'max:2048'],
         ]);
