@@ -49,7 +49,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function post(): BelongsTo
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
