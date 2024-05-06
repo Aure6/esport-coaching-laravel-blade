@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Game;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -35,6 +36,7 @@ class UserFactory extends Factory
             'role_id' => Role::get()->random()->id,
 
             // coach stuff
+            'game_id' => Game::get()->random()->id,
             'bio' => $this->faker->realTextBetween($minNbChars = 80, $maxNbChars = 200),
             // TODO avatar
         ];

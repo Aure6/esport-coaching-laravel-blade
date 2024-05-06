@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
+            GameSeeder::class,
         ]);
 
         User::factory(10)->create();
@@ -26,7 +27,6 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            GameSeeder::class,
             AvailabilitySeeder::class,
         ]);
     }
