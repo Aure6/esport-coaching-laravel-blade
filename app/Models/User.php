@@ -67,4 +67,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Game::class);
     }
+    // public function reviews(): HasMany
+    // {
+    //     return $this->hasMany(Review::class);
+    // }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'coach_id');
+    }
 }

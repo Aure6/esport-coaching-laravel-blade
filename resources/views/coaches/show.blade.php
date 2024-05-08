@@ -28,9 +28,22 @@
                         <div>Français</div>
                     </section>
                 </section>
-                <section class="col-span-2 gap-4 p-6 text-lg text-white bg-neutral-700">
-                    <h3 class="text-2xl font-semibold leading-tight uppercase">A propos</h3>
-                    <div>{{ $coach->bio }}</div>
+                <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
+                    <section>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase">A propos</h3>
+                        <div>{{ $coach->bio }}</div>
+                    </section>
+                    <section>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase">Avis</h3>
+                        <ul class="space-y-4">
+                            @foreach ($coach->reviews as $review)
+                                <li class="text-white bg-neutral-700">
+                                    <div>{{ $review->text }}</div>
+                                    <div>par {{ $review->client_name }} le {{ $review->created_at }}</div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </section>
                 </section>
             </div>
         </div>

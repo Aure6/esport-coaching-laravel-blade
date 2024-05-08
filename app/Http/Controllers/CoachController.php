@@ -11,6 +11,12 @@ class CoachController extends Controller
     {
         $coach = User::findOrFail($id);
 
+        foreach ($coach->reviews as $review) {
+            $review->client_name = $review->client->name;
+        }
+
+        // dd($coach->reviews);
+
         return view('coaches.show', [
             'coach' => $coach,
         ]);
