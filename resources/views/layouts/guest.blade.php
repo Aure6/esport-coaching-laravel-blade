@@ -62,9 +62,9 @@
         @endif
 
         <!-- Page Content -->
-        <div>
+        <main>
             {{ $slot }}
-        </div>
+        </main>
     </div>
 
     <footer class="py-16 text-sm text-center text-white bg-black">
@@ -72,54 +72,5 @@
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     </footer>
 </body>
-
-{{-- <body class="min-h-screen font-sans antialiased text-gray-900">
-    <header class="">
-        <nav class="bg-black border-gray-200 px-4 lg:px-6 py-2.5">
-            <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
-                <div class="flex lg:justify-center lg:col-start-2">
-                    <div>
-                        <a href="/">
-                            <x-application-logo class="w-20 h-20 fill-current text-lime-500" />
-                        </a>
-                    </div>
-                </div>
-                @if (Route::has('login'))
-                    <div class="flex justify-end flex-1 -mx-3">
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Log in
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    Register
-                                </a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif
-            </div>
-        </nav>
-    </header>
-
-    <main class="w-full overflow-hidden bg-white">
-        <x-slot:header>
-            Server Error
-        </x-slot>
-        {{ $slot }}
-    </main>
-
-    <footer class="py-16 text-sm text-center text-white bg-black">
-        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-    </footer>
-</body> --}}
 
 </html>

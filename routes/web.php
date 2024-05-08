@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoachController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,7 @@ Route::get('/dashboard', function () {
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/show/{id}', [GameController::class, 'show'])->name('games.show');
 
-Route::get('/coaches/show/{id}', [GameController::class, 'show'])->name('coaches.show');
+Route::get('/coaches/show/{id}', [CoachController::class, 'show'])->name('coaches.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
