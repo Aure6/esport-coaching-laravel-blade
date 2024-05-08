@@ -16,7 +16,8 @@
                             <div class="inline-block p-1 text-sm">{{ $coach->game->name }}</div>
                         </div>
                     </div>
-                    <div>Coach depuis {{ $coach->created_at->diffForHumans() }}</div>
+                    {{-- <div>Coach depuis {{ $coach->created_at->diffForHumans() }}</div> --}}
+                    <div>Coach depuis {{ $coach->date }}</div>
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase">Succès</h3>
                         <ul>
@@ -39,7 +40,8 @@
                             @foreach ($coach->reviews as $review)
                                 <li class="text-white bg-neutral-700">
                                     <div>{{ $review->text }}</div>
-                                    <div>par {{ $review->client_name }} le {{ $review->created_at }}</div>
+                                    <div>par {{ $review->client_name }} le {{ $review->created_at->format('d-m-Y') }}
+                                    </div>
                                 </li>
                             @endforeach
                         </ul>
