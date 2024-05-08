@@ -62,9 +62,9 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <div>
             {{ $slot }}
-        </main>
+        </div>
     </div>
 
     <footer class="py-16 text-sm text-center text-white bg-black">

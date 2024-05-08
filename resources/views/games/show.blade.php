@@ -13,7 +13,7 @@
                     {{ game.name }}
                     </Link> --}}
                 @foreach ($coaches as $coach)
-                    <a href="{{ route('games.show', $coach->id) }}"
+                    <a href="{{ route('coaches.show', $coach->id) }}"
                         class="flex flex-row gap-4 p-6 text-lg text-white uppercase duration-200 bg-neutral-700 hover:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 hover:scale-105">
                         <x-avatar class="w-20 h-20" :user="$coach" />
                         <div>{{ $coach->name }}</div>

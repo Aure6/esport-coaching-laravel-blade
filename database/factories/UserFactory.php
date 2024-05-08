@@ -38,7 +38,7 @@ class UserFactory extends Factory
             // coach stuff
             'game_id' => Game::get()->random()->id,
             'bio' => $this->faker->realTextBetween($minNbChars = 80, $maxNbChars = 200),
-            // TODO avatar
+            // TODO avatar path
         ];
     }
 

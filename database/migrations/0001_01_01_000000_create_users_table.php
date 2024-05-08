@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->string('avatar_path')->nullable();
             $table->foreignId('game_id')->nullable();
-            // todo language
+            // todo la langue du coach
             // $table->string('language')->nullable();
         });
 
