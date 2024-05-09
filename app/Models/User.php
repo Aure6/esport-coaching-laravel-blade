@@ -57,7 +57,7 @@ class User extends Authenticatable
     }
     public function availabilities(): HasMany
     {
-        return $this->hasMany(Availability::class);
+        return $this->hasMany(Availability::class, 'coach_id');
     }
     public function appointments(): HasMany
     {

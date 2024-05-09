@@ -32,12 +32,12 @@
                 <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
-                        @forelse ($coach->availabilities as $availabilitiy)
+                        @forelse ($coach->availabilities as $availability)
                             <ul class="space-y-4">
                                 <li class="text-white bg-neutral-700">
-                                    <div>{{ $availabilitiy->day_of_week }}</div>
-                                    <div>{{ $availabilitiy->start_time }}</div>
-                                    <div>{{ $availabilitiy->end_time }}</div>
+                                    <div>{{ $availability->day_of_week }}</div>
+                                    <div>{{ $availability->start_time }}</div>
+                                    <div>{{ $availability->end_time }}</div>
                                 </li>
                             </ul>
                         @empty
