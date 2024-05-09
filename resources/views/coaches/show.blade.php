@@ -19,28 +19,46 @@
                     {{-- <div>Coach depuis {{ $coach->created_at->diffForHumans() }}</div> --}}
                     <div>Coach depuis {{ $coach->date }}</div>
                     <section>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase">Succès</h3>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Succès</h3>
                         <ul>
                             <li>1ère place tournoi 1v1</li>
                         </ul>
                     </section>
                     <section>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase">Langues</h3>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Langues</h3>
                         <div>Français</div>
                     </section>
                 </section>
                 <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
                     <section>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase">A propos</h3>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
+                        @forelse ($coach->availabilities as $availabilitiy)
+                            <ul class="space-y-4">
+                                <li class="text-white bg-neutral-700">
+                                    <div>{{ $availabilitiy->day_of_week }}</div>
+                                    <div>{{ $availabilitiy->start_time }}</div>
+                                    <div>{{ $availabilitiy->end_time }}</div>
+                                </li>
+                            </ul>
+                        @empty
+                            <div class="p-6 text-lg text-white bg-neutral-700 col-span-full">
+                                {{ __('Aucun disponibilité trouvé pour le moment pour le coach ' . $coach->name . '.') }}
+                            </div>
+                        @endforelse
+                    </section>
+                    <section>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">A propos</h3>
                         <div>{{ $coach->bio }}</div>
                     </section>
                     <section>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase">Avis</h3>
+                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Avis</h3>
                         <ul class="space-y-4">
                             @foreach ($coach->reviews as $review)
                                 <li class="text-white bg-neutral-700">
                                     <div>{{ $review->text }}</div>
-                                    <div>par {{ $review->client_name }} le {{ $review->created_at->format('d-m-Y') }}
+                                    <div class="text-sm">par <span class="italic">{{ $review->client_name }}</span>
+                                        le
+                                        {{ $review->created_at->format('d-m-Y') }}
                                     </div>
                                 </li>
                             @endforeach
