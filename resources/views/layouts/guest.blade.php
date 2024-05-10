@@ -23,7 +23,8 @@
                 <div class="flex lg:justify-center lg:col-start-2">
                     <div>
                         <a href="/">
-                            <x-application-logo class="w-20 h-20 fill-current text-lime-500" />
+                            <x-application-logo
+                                class="w-20 h-20 duration-200 fill-current text-lime-500 hover:scale-105" />
                         </a>
                     </div>
                 </div>
