@@ -18,7 +18,7 @@ class CoachController extends Controller
             $review->client_name = $review->client->name;
         }
 
-        $coach->date = $coach->created_at->diffForHumans(now(), CarbonInterface::DIFF_ABSOLUTE, false);
+        $coach->created_at_date = $coach->created_at->diffForHumans(now(), CarbonInterface::DIFF_ABSOLUTE, false);
 
         $availabilities = [];
         $coachAvailabilities = Availability::where('coach_id', $coach->id)->get();
@@ -40,9 +40,22 @@ class CoachController extends Controller
             // }
         }
 
+        // Calculate the dates for the next 8 weeks
+        $dates = collect();
+        for ($i = 0; $i < 8 * 7; $i++) {
+            $date = Carbon::now()->addDays($i);
+            $dayOfWeek = $date->format('l');
+
+            // Check if the coach has availability on this day
+            if ($coachAvailabilities->contains('day_of_week', $dayOfWeek)) {
+                $dates->push($date->format('Y-m-d'));
+            }
+        }
+
         return view('coaches.show', [
             'coach' => $coach,
             'availabilities' => $availabilities,
+            'dates' => $dates,
         ]);
     }
 }

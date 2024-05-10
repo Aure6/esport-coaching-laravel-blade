@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     {{-- <div>Coach depuis {{ $coach->created_at->diffForHumans() }}</div> --}}
-                    <div>Coach depuis {{ $coach->date }}</div>
+                    <div>Coach depuis {{ $coach->created_at_date }}</div>
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Succès</h3>
                         <ul>
@@ -36,13 +36,52 @@
                             @csrf
 
                             <div class="date-picker">
+                                <label for="date">Sélectionne une date</label>
+                                @php
+                                    $weekNumber = 0;
+                                @endphp
+                                @foreach ($dates as $date)
+                                    @php
+                                        $currentWeekNumber = \Carbon\Carbon::parse($date)->weekOfYear;
+                                    @endphp
+                                    @if ($currentWeekNumber !== $weekNumber)
+                                        @if ($weekNumber !== 0)
+                            </div> <!-- Close the previous week div -->
+                            @endif
+                            <div class="flex justify-around row"> <!-- Open a new week div -->
+                                @php
+                                    $weekNumber = $currentWeekNumber;
+                                @endphp
+                                @endif
+                                <div>
+                                    <input type="radio" id="{{ $date }}" name="date"
+                                        value="{{ $date }}" required>
+                                    <label for="{{ $date }}">{{ $date }}</label>
+                                </div>
+                                @endforeach
+                            </div> <!-- Close the last week div -->
+
+                            {{-- <div class="date-picker">
+                                <label for="date">Select a date:</label>
+                                @foreach ($dates as $date)
+                                    <div>
+                                        <input type="radio" id="{{ $date }}" name="date"
+                                            value="{{ $date }}" required>
+                                        <label for="{{ $date }}">{{ $date }}</label>
+                                    </div>
+                                @endforeach
+                            </div> --}}
+
+                            {{-- input type date --}}
+                            {{-- <div class="date-picker">
                                 <label for="date">Select a date:</label>
                                 <input type="date" id="date" name="date" required>
-                            </div>
+                            </div> --}}
 
                             @foreach ($availabilities as $day => $hours)
                                 <div class="day" id="{{ $day }}" style="display: none;">
                                     <h4>{{ $day }}</h4>
+                                    <legend>Sélectionne les slots d'heure</legend>
 
                                     @if (empty($hours))
                                         <p>No availability on this day.</p>
@@ -50,7 +89,8 @@
                                         @foreach ($hours as $hour)
                                             <div class="hour">
                                                 <input type="checkbox" id="{{ $day }}-{{ $hour }}"
-                                                    name="hours[]" value="{{ $day }}-{{ $hour }}">
+                                                    name="hours[]" value="{{ $day }}-{{ $hour }}"
+                                                    class="hourCheckbox">
                                                 <label
                                                     for="{{ $day }}-{{ $hour }}">{{ $hour }}</label>
                                             </div>
@@ -59,20 +99,44 @@
                                 </div>
                             @endforeach
 
-                            <button type="submit">Book</button>
+                            <x-primary-button type="submit" id="submitButton" disabled
+                                class="cursor-not-allowed">Réserver</x-primary-button>
                         </form>
 
                         <script>
-                            document.getElementById('date').addEventListener('change', function() {
-                                var date = new Date(this.value);
-                                var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()];
-                                document.querySelectorAll('.day').forEach(function(el) {
-                                    el.style.display = el.id === day ? 'block' : 'none';
+                            document.querySelectorAll('input[name="date"]').forEach(function(radioButton) {
+                                radioButton.addEventListener('change', function() {
+                                    var date = new Date(this.value);
+                                    var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+                                        date.getDay()
+                                    ];
+                                    document.querySelectorAll('.day').forEach(function(el) {
+                                        el.style.display = el.id === day ? 'block' : 'none';
+                                    });
+                                });
+                            });
+
+                            var checkboxes = document.querySelectorAll('.hourCheckbox');
+                            var submitButton = document.getElementById('submitButton');
+
+                            checkboxes.forEach(function(checkbox) {
+                                checkbox.addEventListener('change', function() {
+                                    var isChecked = Array.from(checkboxes).some(function(checkbox) {
+                                        return checkbox.checked;
+                                    });
+                                    submitButton.disabled = !isChecked;
+                                    if (isChecked) {
+                                        submitButton.classList.remove('cursor-not-allowed');
+                                        submitButton.classList.add('cursor-pointer');
+                                    } else {
+                                        submitButton.classList.add('cursor-not-allowed');
+                                        submitButton.classList.remove('cursor-pointer');
+                                    }
                                 });
                             });
                         </script>
 
-                        @forelse ($coach->availabilities as $availability)
+                        {{-- @forelse ($coach->availabilities as $availability)
                             <ul class="space-y-4">
                                 <li class="text-white bg-neutral-700">
                                     <div>{{ $availability->day_of_week }}</div>
@@ -84,7 +148,7 @@
                             <div class="p-6 text-lg text-white bg-neutral-700 col-span-full">
                                 {{ __('Aucun disponibilité trouvé pour le moment pour le coach ' . $coach->name . '.') }}
                             </div>
-                        @endforelse
+                        @endforelse --}}
                     </section>
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">A propos</h3>
