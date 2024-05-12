@@ -58,7 +58,7 @@
                                         <input type="radio" id="{{ $date }}" name="date"
                                             value="{{ $date }}" class="hidden peer" required />
                                         <label for="{{ $date }}"
-                                            class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                             <div class="block">
                                                 {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
                                                 <div class="w-full">{{ $date }}</div>
@@ -96,8 +96,10 @@
                                 </div>
                             @endforeach
 
-                            <x-primary-button type="submit" id="submitButton" disabled
-                                class="cursor-not-allowed">Réserver</x-primary-button>
+                            <div class="flex justify-center">
+                                <x-primary-button type="submit" id="submitButton" disabled
+                                    class="cursor-not-allowed">Réserver</x-primary-button>
+                            </div>
                         </form>
 
                         <script>
