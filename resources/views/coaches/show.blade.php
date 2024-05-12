@@ -48,35 +48,32 @@
                                         @if ($weekNumber !== 0)
                             </div> <!-- Close the previous week div -->
                             @endif
-                            <div class="flex justify-around row"> <!-- Open a new week div -->
-                                @php
-                                    $weekNumber = $currentWeekNumber;
-                                @endphp
-                                @endif
-                                <div>
-                                    <input type="radio" id="{{ $date }}" name="date"
-                                        value="{{ $date }}" required>
-                                    <label for="{{ $date }}">{{ $date }}</label>
-                                </div>
-                                @endforeach
-                            </div> <!-- Close the last week div -->
-
-                            {{-- <div class="date-picker">
-                                <label for="date">Select a date:</label>
-                                @foreach ($dates as $date)
-                                    <div>
+                            <ul>
+                                <div class="flex justify-around row"> <!-- Open a new week div -->
+                                    @php
+                                        $weekNumber = $currentWeekNumber;
+                                    @endphp
+                                    @endif
+                                    <li class="w-full">
                                         <input type="radio" id="{{ $date }}" name="date"
-                                            value="{{ $date }}" required>
-                                        <label for="{{ $date }}">{{ $date }}</label>
-                                    </div>
-                                @endforeach
-                            </div> --}}
-
-                            {{-- input type date --}}
-                            {{-- <div class="date-picker">
-                                <label for="date">Select a date:</label>
-                                <input type="date" id="date" name="date" required>
-                            </div> --}}
+                                            value="{{ $date }}" class="hidden peer" required />
+                                        <label for="{{ $date }}"
+                                            class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
+                                                <div class="w-full">{{ $date }}</div>
+                                            </div>
+                                            {{-- <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                            </svg> --}}
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </div> <!-- Close the last week div -->
+                            </ul>
 
                             @foreach ($availabilities as $day => $hours)
                                 <div class="day" id="{{ $day }}" style="display: none;">
@@ -90,7 +87,7 @@
                                             <div class="hour">
                                                 <input type="checkbox" id="{{ $day }}-{{ $hour }}"
                                                     name="hours[]" value="{{ $day }}-{{ $hour }}"
-                                                    class="hourCheckbox">
+                                                    class="hourCheckbox text-lime-500 focus:ring-lime-600">
                                                 <label
                                                     for="{{ $day }}-{{ $hour }}">{{ $hour }}</label>
                                             </div>
