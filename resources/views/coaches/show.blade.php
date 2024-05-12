@@ -32,48 +32,48 @@
                 <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
-                        <form method="POST" action="/book">
+                        <form method="POST" action="/book" class="">
                             @csrf
 
-                            <div class="date-picker">
+                            <div class="space-y-1 date-picker">
                                 <label for="date">Sélectionne une date</label>
-                                @php
-                                    $weekNumber = 0;
-                                @endphp
-                                @foreach ($dates as $date)
+                                <ul>
                                     @php
-                                        $displayedDate = date('d-m-Y', strtotime($date));
-                                        $currentWeekNumber = \Carbon\Carbon::parse($date)->weekOfYear;
+                                        $weekNumber = 0;
                                     @endphp
-                                    @if ($currentWeekNumber !== $weekNumber)
-                                        @if ($weekNumber !== 0)
+                                    @foreach ($dates as $date)
+                                        @php
+                                            $displayedDate = date('d-m-Y', strtotime($date));
+                                            $currentWeekNumber = \Carbon\Carbon::parse($date)->weekOfYear;
+                                        @endphp
+                                        @if ($currentWeekNumber !== $weekNumber)
+                                            @if ($weekNumber !== 0)
                             </div> <!-- Close the previous week div -->
                             @endif
-                            <ul>
-                                <div class="flex justify-around row"> <!-- Open a new week div -->
-                                    @php
-                                        $weekNumber = $currentWeekNumber;
-                                    @endphp
-                                    @endif
-                                    <li class="w-full">
-                                        <input type="radio" id="{{ $date }}" name="date"
-                                            value="{{ $date }}" class="hidden peer" required />
-                                        <label for="{{ $date }}"
-                                            class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <div class="block">
-                                                {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
-                                                <div class="w-full">{{ $displayedDate }}</div>
-                                            </div>
-                                            {{-- <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
+                            <div class="flex justify-around row"> <!-- Open a new week div -->
+                                @php
+                                    $weekNumber = $currentWeekNumber;
+                                @endphp
+                                @endif
+                                <li class="w-full">
+                                    <input type="radio" id="{{ $date }}" name="date"
+                                        value="{{ $date }}" class="hidden peer" required />
+                                    <label for="{{ $date }}"
+                                        class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                        <div class="block">
+                                            {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
+                                            <div class="w-full">{{ $displayedDate }}</div>
+                                        </div>
+                                        {{-- <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2"
                                                     d="M1 5h12m0 0L9 1m4 4L9 9" />
                                             </svg> --}}
-                                        </label>
-                                    </li>
-                                    @endforeach
-                                </div> <!-- Close the last week div -->
+                                    </label>
+                                </li>
+                                @endforeach
+                            </div> <!-- Close the last week div -->
                             </ul>
 
                             @foreach ($availabilities as $day => $hours)
