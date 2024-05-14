@@ -18,6 +18,8 @@ Route::get('/games/show/{id}', [GameController::class, 'show'])->name('games.sho
 
 Route::get('/coaches/show/{id}', [CoachController::class, 'show'])->name('coaches.show');
 
+Route::post('/appointments/store', [AppointmentController::class, 'show'])->name('appointments.store');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

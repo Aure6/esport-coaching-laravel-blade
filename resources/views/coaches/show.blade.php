@@ -32,7 +32,7 @@
                 <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
-                        <form method="POST" action="/book" class="">
+                        <form method="POST" action="{{ route('appointments.store') }}" class="">
                             @csrf
 
                             <div class="space-y-1 date-picker">
