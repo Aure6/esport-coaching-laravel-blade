@@ -32,6 +32,15 @@
                 <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
                     <section>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
+                        @if ($errors->any())
+                            <div class="bg-red-500">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('appointments.store') }}" class="">
                             @csrf
 

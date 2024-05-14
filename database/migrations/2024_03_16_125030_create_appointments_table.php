@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('coach_id')->constrained('users')->cascadeOnDelete();
+            $table->string('date');
+            $table->array('hours');
             $table->timestamps();
         });
     }
