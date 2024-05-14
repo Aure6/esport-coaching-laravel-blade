@@ -68,7 +68,7 @@ class AppointmentController extends Controller
         // Remove the form data from the session
         $request->session()->forget('form_data');
 
-        return redirect()->route('appointments.index')->with('success', 'Le rendez-vous a été pris avec succès.');
+        return redirect()->route('dashboard.index')->with('success', 'Le rendez-vous a été pris avec succès.');
         // return redirect()->route('appointments.index')->with('success', 'Appointment has been created successfully.');
     }
 }
