@@ -50,7 +50,7 @@
                                     @php
                                         $weekNumber = 0;
                                     @endphp
-                                    @foreach ($dates as $date)
+                                    @forelse ($dates as $date)
                                         @php
                                             $displayedDate = date('d-m-Y', strtotime($date));
                                             $dayName = date('l', strtotime($date));
@@ -82,18 +82,23 @@
                                             </svg> --}}
                                     </label>
                                 </li>
-                                @endforeach
+                            @empty
+                                <div>
+                                    {{ __('Aucun disponibilité trouvé pour le moment pour le coach ' . $coach->name . '.') }}
+                                </div>
+                                @endforelse
                             </div> <!-- Close the last week div -->
                             </ul>
 
                             @foreach ($availabilities as $day => $hours)
                                 <div class="day" id="{{ $day }}" style="display: none;">
                                     {{-- <h4>{{ __('days.' . $day) }}</h4> --}}
-                                    <legend>Sélectionne les slots d'heure</legend>
+                                    <legend>Sélectionne un ou plusieurs slots d'heure pour le jour sélectionné</legend>
 
                                     @if (empty($hours))
                                         <p>No availability on this day.</p>
                                     @else
+                                        <p>Durée d'un service: 1 heure.</p>
                                         @foreach ($hours as $hour)
                                             <div class="hour">
                                                 <input type="checkbox" id="{{ $day }}-{{ $hour }}"

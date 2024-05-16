@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,14 +15,14 @@ class AppointmentSeeder extends Seeder
      */
     public function run(): void
     {
-        $coaches = DB::table('users')->whereHas(
+        $coaches = User::whereHas(
             'role',
             function ($query) {
                 $query->where('name', 'coach');
             }
         )->pluck('id');
 
-        $clients = DB::table('users')->whereHas(
+        $clients = User::whereHas(
             'role',
             function ($query) {
                 $query->where('name', 'client');
@@ -32,14 +33,16 @@ class AppointmentSeeder extends Seeder
             $availabilities = DB::table('availabilities')->where('coach_id', $coach_id)->get();
 
             foreach ($availabilities as $availability) {
-                $appointment_hours = $this->generateAppointmentHours($availability->start_time, $availability->end_time);
+                // Generate a random number between 0 and 1
+                $randomNumber = mt_rand() / mt_getrandmax();
 
-                foreach ($appointment_hours as $hour) {
+                // If the random number is less than 0.5, create an appointment
+                if ($randomNumber < 0.5) {
                     DB::table('appointments')->insert([
                         'client_id' => $clients->random(),
                         'coach_id' => $coach_id,
                         'date' => Carbon::parse($availability->day_of_week)->format('Y-m-d'),
-                        'hours' => $hour,
+                        'start' => $availability->start_time, // Changed 'hours' to 'start'
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);
@@ -51,18 +54,18 @@ class AppointmentSeeder extends Seeder
     /**
      * Generate appointment hours between start time and end time.
      */
-    private function generateAppointmentHours(string $start_time, string $end_time): array
-    {
-        $start_time = Carbon::createFromFormat('H:i:s', $start_time);
-        $end_time = Carbon::createFromFormat('H:i:s', $end_time);
+    // private function generateAppointmentHours(string $start_time, string $end_time): array
+    // {
+    //     $start_time = Carbon::createFromFormat('H:i:s', $start_time);
+    //     $end_time = Carbon::createFromFormat('H:i:s', $end_time);
 
-        $appointment_hours = [];
+    //     $appointment_hours = [];
 
-        while ($start_time->lessThan($end_time)) {
-            $appointment_hours[] = $start_time->format('H:i:s');
-            $start_time->addHour(); // assumes that each appointment lasts one hour. If appointments have a different duration, you should modify the addHour() method accordingly. For example, for 30-minute appointments, you could use addMinutes(30).
-        }
+    //     while ($start_time->lessThan($end_time)) {
+    //         $appointment_hours[] = $start_time->format('H:i:s');
+    //         $start_time->addHour(); // assumes that each appointment lasts one hour. If appointments have a different duration, you should modify the addHour() method accordingly. For example, for 30-minute appointments, you could use addMinutes(30).
+    //     }
 
-        return $appointment_hours;
-    }
+    //     return $appointment_hours;
+    // }
 }

@@ -36,11 +36,15 @@ class AvailabilitySeeder extends Seeder
                     'day_of_week' => $days_of_week[array_rand($days_of_week)],
                     'start_time' => '09:00:00',
                     'end_time' => '12:00:00',
+                    // 'start_time' => '09:00',
+                    // 'end_time' => '12:00',
                 ],
                 [
                     'day_of_week' => $days_of_week[array_rand($days_of_week)],
                     'start_time' => '14:00:00',
                     'end_time' => '17:00:00',
+                    // 'start_time' => '14:00',
+                    // 'end_time' => '17:00',
                 ],
             ];
 

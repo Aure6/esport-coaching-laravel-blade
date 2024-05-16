@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('coach_id')->constrained('users')->cascadeOnDelete();
             $table->string('date');
-            $table->array('hours');
+            $table->string('start'); // eg: 09:00
             $table->timestamps();
         });
     }

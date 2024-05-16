@@ -28,13 +28,12 @@ class AppointmentController extends Controller
 
         $validatedData = $request->validate([
             'date' => 'required|date',
-            'hours' => 'required|array',
-            'hours.*' => 'required|string',
+            'start' => 'required|string', // Change 'hours' to 'start'
         ]);
 
-        // Get the logged-in user
         $user = Auth::user();
 
+        /*
         // Check if the selected date and hours are still available
         foreach ($validatedData['hours'] as $hour) {
             list($day, $time) = explode('-', $hour);
@@ -58,11 +57,21 @@ class AppointmentController extends Controller
                 return back()->withErrors(["La date et le temps sélectionnés viennent d'être réservés entre-temps. Veuillez effectuer un choix à nouveau."]);
             }
         }
+ */
+
+        // Check if the selected date and start time already exist in the appointments table
+        $existingAppointment = Appointment::where('date', $validatedData['date'])
+            ->where('start', $validatedData['start'])
+            ->first();
+
+        if ($existingAppointment) {
+            return back()->withErrors(["La date et le temps sélectionnés viennent d'être réservés entre-temps. Veuillez effectuer un choix à nouveau."]);
+        }
 
         $appointment = new Appointment;
         $appointment->date = $validatedData['date'];
-        $appointment->hours = $validatedData['hours'];
-        $appointment->user_id = $user->id; // Associate the appointment with the logged-in user
+        $appointment->start = $validatedData['start']; // Change 'hours' to 'start'
+        $appointment->user_id = $user->id;
         $appointment->save();
 
         // Remove the form data from the session

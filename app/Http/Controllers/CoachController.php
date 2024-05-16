@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoachController extends Controller
 {
@@ -28,8 +29,21 @@ class CoachController extends Controller
             $interval = 60; // Interval in minutes
 
             while ($start->lessThan($end)) {
-                $availabilities[$availability->day_of_week][] = $start->format('H:i');
+                // Check if there is an appointment with the same coach and the same start time
+                $appointmentExists = DB::table('appointments')
+                    ->where('coach_id', $coach->id)
+                    ->where('start', $start->format('H:i'))
+                    ->exists();
+
+                if (!$appointmentExists) {
+                    $availabilities[$availability->day_of_week][] = $start->format('H:i');
+                }
+
                 $start->addMinutes($interval);
+
+
+                // $availabilities[$availability->day_of_week][] = $start->format('H:i');
+                // $start->addMinutes($interval);
             }
             // while ($start->lessThan($end)) {
             //     $timeSlot = $start->format('H:i');
