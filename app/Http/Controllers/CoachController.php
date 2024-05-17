@@ -23,53 +23,45 @@ class CoachController extends Controller
 
         $availabilities = [];
         $coachAvailabilities = Availability::where('coach_id', $coach->id)->get();
-        foreach ($coachAvailabilities as $availability) {
-            $start = Carbon::parse($availability->start_time);
-            $end = Carbon::parse($availability->end_time);
-            $interval = 60; // Interval in minutes
+        $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-            while ($start->lessThan($end)) {
-                // Check if there is an appointment with the same coach and the same start time
-                $appointmentExists = DB::table('appointments')
-                    ->where('coach_id', $coach->id)
-                    ->where('start', $start->format('H:i'))
-                    ->exists();
-
-                if (!$appointmentExists) {
-                    $availabilities[$availability->day_of_week][] = $start->format('H:i');
-                }
-
-                $start->addMinutes($interval);
-
-
-                // $availabilities[$availability->day_of_week][] = $start->format('H:i');
-                // $start->addMinutes($interval);
-            }
-            // while ($start->lessThan($end)) {
-            //     $timeSlot = $start->format('H:i');
-            //     if (!isset($availabilities[$availability->day_of_week][$timeSlot])) {
-            //         $availabilities[$availability->day_of_week][$timeSlot] = $timeSlot;
-            //     }
-            //     $start->addMinutes($interval);
-            // }
-        }
-
-        // Calculate the dates for the next 8 weeks
-        $dates = collect();
+        // the for loop calculates dates for the 8 next weeks
         for ($i = 0; $i < 8 * 7; $i++) {
             $date = Carbon::now()->addDays($i);
             $dayOfWeek = $date->format('l');
 
             // Check if the coach has availability on this day
             if ($coachAvailabilities->contains('day_of_week', $dayOfWeek)) {
-                $dates->push($date->format('Y-m-d'));
+                foreach ($coachAvailabilities as $availability) {
+                    if ($availability->day_of_week == $dayOfWeek) {
+                        $start = Carbon::parse($availability->start_time);
+                        $end = Carbon::parse($availability->end_time);
+                        $interval = 60; // Interval in minutes
+
+                        while ($start->lessThan($end)) {
+                            // Check if there is an appointment with the same coach, the same start time, and the same date
+                            $appointmentExists = DB::table('appointments')
+                                ->where('coach_id', $coach->id)
+                                ->where('start', $start->format('H:i:s'))
+                                ->whereDate('date', $date->format('Y-m-d'))
+                                ->exists();
+
+                            if (!$appointmentExists) {
+                                $availabilities[$date->format('Y-m-d')][$start->format('H:i')] = $start->format('H:i');
+                            }
+
+                            $start->addMinutes($interval);
+                        }
+                    }
+                }
             }
         }
+
+        dd($availabilities);
 
         return view('coaches.show', [
             'coach' => $coach,
             'availabilities' => $availabilities,
-            'dates' => $dates,
         ]);
     }
 }
