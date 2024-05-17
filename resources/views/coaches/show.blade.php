@@ -29,8 +29,8 @@
                         <div>Français</div>
                     </section>
                 </section>
-                <section class="col-span-2 gap-4 p-6 space-y-8 text-lg text-white bg-neutral-700">
-                    <section>
+                <section class="col-span-2 gap-4 space-y-8 text-lg text-white ">
+                    <section class="p-6 bg-neutral-700">
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
                         @if ($errors->any())
                             <div class="bg-red-500">
@@ -50,7 +50,7 @@
                                     @php
                                         $weekNumber = 0;
                                     @endphp
-                                    @forelse ($dates as $date)
+                                    @forelse ($availabilities as $date => $hours)
                                         @php
                                             $displayedDate = date('d-m-Y', strtotime($date));
                                             $dayName = date('l', strtotime($date));
@@ -74,12 +74,6 @@
                                             {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
                                             <div class="w-full">{{ __('days.' . $dayName) }} {{ $displayedDate }}</div>
                                         </div>
-                                        {{-- <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                            </svg> --}}
                                     </label>
                                 </li>
                             @empty
@@ -90,8 +84,8 @@
                             </div> <!-- Close the last week div -->
                             </ul>
 
-                            @foreach ($availabilities as $day => $hours)
-                                <div class="day" id="{{ $day }}" style="display: none;">
+                            @foreach ($availabilities as $date => $hours)
+                                <div class="day" id="{{ $date }}" style="display: none;">
                                     {{-- <h4>{{ __('days.' . $day) }}</h4> --}}
                                     <legend>Sélectionne un ou plusieurs slots d'heure pour le jour sélectionné</legend>
 
@@ -101,11 +95,11 @@
                                         <p>Durée d'un service: 1 heure.</p>
                                         @foreach ($hours as $hour)
                                             <div class="hour">
-                                                <input type="checkbox" id="{{ $day }}-{{ $hour }}"
-                                                    name="hours[]" value="{{ $day }}-{{ $hour }}"
+                                                <input type="checkbox" id="{{ $date }}-{{ $hour }}"
+                                                    name="hours[]" value="{{ $date }}-{{ $hour }}"
                                                     class="hourCheckbox text-lime-500 focus:ring-lime-600">
                                                 <label
-                                                    for="{{ $day }}-{{ $hour }}">{{ $hour }}</label>
+                                                    for="{{ $date }}-{{ $hour }}">{{ $hour }}</label>
                                             </div>
                                         @endforeach
                                     @endif
@@ -118,27 +112,52 @@
                             </div>
                         </form>
 
+
                         <script>
-                            document.querySelectorAll('input[name="date"]').forEach(function(radioButton) {
-                                radioButton.addEventListener('change', function() {
-                                    var date = new Date(this.value);
-                                    var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
-                                        date.getDay()
-                                    ];
-                                    document.querySelectorAll('.day').forEach(function(el) {
-                                        el.style.display = el.id === day ? 'block' : 'none';
+                            // Get all the radio buttons
+                            const radios = document.querySelectorAll('input[type=radio][name="date"]');
+
+                            // Add a change event listener to each radio button
+                            radios.forEach(function(radio) {
+                                radio.addEventListener('change', function() {
+                                    // Hide all the day divs
+                                    document.querySelectorAll('.day').forEach(function(dayDiv) {
+                                        dayDiv.style.display = 'none';
                                     });
+
+                                    // Show the selected day div
+                                    const selectedDayDiv = document.querySelector('.day[id="' + this.value + '"]');
+                                    if (selectedDayDiv) {
+                                        selectedDayDiv.style.display = 'block';
+                                    }
+
+                                    // Enable the submit button
+                                    const submitButton = document.getElementById('submitButton');
+                                    if (submitButton) {
+                                        submitButton.disabled = false;
+                                        submitButton.classList.remove('cursor-not-allowed');
+                                    }
                                 });
                             });
 
-                            var checkboxes = document.querySelectorAll('.hourCheckbox');
-                            var submitButton = document.getElementById('submitButton');
 
-                            checkboxes.forEach(function(checkbox) {
+                            // Get all the hour checkboxes
+                            const hourCheckboxes = document.querySelectorAll('.hourCheckbox');
+                            const submitButton = document.getElementById('submitButton');
+
+                            // Initially disable the submit button
+                            submitButton.disabled = true;
+                            submitButton.classList.add('cursor-not-allowed');
+
+                            // Add a change event listener to each checkbox
+                            hourCheckboxes.forEach(function(checkbox) {
                                 checkbox.addEventListener('change', function() {
-                                    var isChecked = Array.from(checkboxes).some(function(checkbox) {
+                                    // Check if at least one checkbox is checked
+                                    const isChecked = Array.from(hourCheckboxes).some(function(checkbox) {
                                         return checkbox.checked;
                                     });
+
+                                    // Enable or disable the submit button based on whether a checkbox is checked
                                     submitButton.disabled = !isChecked;
                                     if (isChecked) {
                                         submitButton.classList.remove('cursor-not-allowed');
@@ -150,26 +169,12 @@
                                 });
                             });
                         </script>
-
-                        {{-- @forelse ($coach->availabilities as $availability)
-                            <ul class="space-y-4">
-                                <li class="text-white bg-neutral-700">
-                                    <div>{{ $availability->day_of_week }}</div>
-                                    <div>{{ $availability->start_time }}</div>
-                                    <div>{{ $availability->end_time }}</div>
-                                </li>
-                            </ul>
-                        @empty
-                            <div class="p-6 text-lg text-white bg-neutral-700 col-span-full">
-                                {{ __('Aucun disponibilité trouvé pour le moment pour le coach ' . $coach->name . '.') }}
-                            </div>
-                        @endforelse --}}
                     </section>
-                    <section>
+                    <section class='p-6 bg-neutral-700'>
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">A propos</h3>
                         <div>{{ $coach->bio }}</div>
                     </section>
-                    <section>
+                    <section class="p-6 bg-neutral-700">
                         <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Avis</h3>
                         <ul class="space-y-4">
                             @foreach ($coach->reviews as $review)

@@ -47,7 +47,7 @@ class CoachController extends Controller
                                 ->exists();
 
                             if (!$appointmentExists) {
-                                $availabilities[$date->format('Y-m-d')][$start->format('H:i')] = $start->format('H:i');
+                                $availabilities[$date->format('Y-m-d')][$start->format('H:i')] = $start->format('H:i'); // the repetition, such as "16:00" => "16:00" might seem redundant, but it can be useful in certain scenarios. For example, if you want to quickly check if a specific time slot is available, you can do so by checking if the key exists in the array, which is faster than searching through the values of the array.
                             }
 
                             $start->addMinutes($interval);
@@ -57,7 +57,7 @@ class CoachController extends Controller
             }
         }
 
-        dd($availabilities);
+        // dd($availabilities);
 
         return view('coaches.show', [
             'coach' => $coach,
