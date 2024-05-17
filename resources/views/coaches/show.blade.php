@@ -114,8 +114,31 @@
 
 
                         <script>
-                            // Get all the radio buttons
-                            const radios = document.querySelectorAll('input[type=radio][name="date"]');
+                            // Get all the radio buttons and hour checkboxes
+                            var radios = document.querySelectorAll('input[type=radio][name="date"]');
+                            var hourCheckboxes = document.querySelectorAll('.hourCheckbox');
+                            var submitButton = document.getElementById('submitButton');
+
+                            // Initially disable the submit button
+                            submitButton.disabled = true;
+                            submitButton.classList.add('cursor-not-allowed');
+
+                            // Function to check if at least one hour checkbox is checked
+                            function checkHourCheckboxes() {
+                                var isChecked = Array.from(hourCheckboxes).some(function(checkbox) {
+                                    return checkbox.checked;
+                                });
+
+                                // Enable or disable the submit button based on whether a checkbox is checked
+                                submitButton.disabled = !isChecked;
+                                if (isChecked) {
+                                    submitButton.classList.remove('cursor-not-allowed');
+                                    submitButton.classList.add('cursor-pointer');
+                                } else {
+                                    submitButton.classList.add('cursor-not-allowed');
+                                    submitButton.classList.remove('cursor-pointer');
+                                }
+                            }
 
                             // Add a change event listener to each radio button
                             radios.forEach(function(radio) {
@@ -126,47 +149,19 @@
                                     });
 
                                     // Show the selected day div
-                                    const selectedDayDiv = document.querySelector('.day[id="' + this.value + '"]');
+                                    var selectedDayDiv = document.querySelector('.day[id="' + this.value + '"]');
                                     if (selectedDayDiv) {
                                         selectedDayDiv.style.display = 'block';
                                     }
 
-                                    // Enable the submit button
-                                    const submitButton = document.getElementById('submitButton');
-                                    if (submitButton) {
-                                        submitButton.disabled = false;
-                                        submitButton.classList.remove('cursor-not-allowed');
-                                    }
+                                    // Check the hour checkboxes whenever a date is selected
+                                    checkHourCheckboxes();
                                 });
                             });
 
-
-                            // Get all the hour checkboxes
-                            const hourCheckboxes = document.querySelectorAll('.hourCheckbox');
-                            const submitButton = document.getElementById('submitButton');
-
-                            // Initially disable the submit button
-                            submitButton.disabled = true;
-                            submitButton.classList.add('cursor-not-allowed');
-
-                            // Add a change event listener to each checkbox
+                            // Add a change event listener to each hour checkbox
                             hourCheckboxes.forEach(function(checkbox) {
-                                checkbox.addEventListener('change', function() {
-                                    // Check if at least one checkbox is checked
-                                    const isChecked = Array.from(hourCheckboxes).some(function(checkbox) {
-                                        return checkbox.checked;
-                                    });
-
-                                    // Enable or disable the submit button based on whether a checkbox is checked
-                                    submitButton.disabled = !isChecked;
-                                    if (isChecked) {
-                                        submitButton.classList.remove('cursor-not-allowed');
-                                        submitButton.classList.add('cursor-pointer');
-                                    } else {
-                                        submitButton.classList.add('cursor-not-allowed');
-                                        submitButton.classList.remove('cursor-pointer');
-                                    }
-                                });
+                                checkbox.addEventListener('change', checkHourCheckboxes);
                             });
                         </script>
                     </section>
