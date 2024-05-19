@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GameController;
@@ -24,6 +25,12 @@ Route::post('/appointments/store', [AppointmentController::class, 'show'])->name
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Route::get('/availabilities', 'AvailabilityController@edit')->name('availabilities.edit');
+    // Route::post('/availabilities', 'AvailabilityController@update')->name('availabilities.update');
+    Route::post('/availabilities.update', [AvailabilityController::class, 'update'])->name('availabilities.update');
+
+    Route::post('/user/updateRole', [DashboardController::class, 'updateRole'])->name('user.updateRole');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

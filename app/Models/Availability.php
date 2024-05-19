@@ -15,9 +15,12 @@ class Availability extends Model
      *
      * @var array<int, string>
      */
-    // protected $fillable = [
-
-    // ];
+    protected $fillable = [
+        'coach_id',
+        'start_time',
+        'end_time',
+        'day_of_week',
+    ];
 
     public function user(): BelongsTo
     {
