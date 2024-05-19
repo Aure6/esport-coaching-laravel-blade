@@ -12,35 +12,46 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div class="card-header">Appointments</div>
+            <div class="mx-auto overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <h3 class="text-xl uppercase text-lime-500 card-header">Appointments</h3>
 
                 <div class="card-body">
                     @if ($appointments->isEmpty())
                         <p>No appointments found.</p>
                     @else
-                        <table class="table">
+                        <table>
                             <thead>
                                 <tr>
-                                    <th>Client/Coach</th>
+                                    <th>Utilisateurs
+                                        {{-- @if (Auth::user()->role_id == 'coach')
+                                            {{ Clients }}
+                                        @else
+                                            {{ Coach }}
+                                        @endif --}}
+                                    </th>
                                     <th>Date</th>
-                                    <th>Hours</th>
-                                    <th>Created At</th>
+                                    <th>Heure</th>
+                                    <th></th>
+                                    <th>Planifié le</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($appointments as $appointment)
-                                    <tr>
-                                        <td>
+                                    <tr class="border hover:bg-gray-200 even:bg-gray-100 odd:bg-white">
+                                        <td class="p-1">
                                             @if (Auth::user()->role_id == 'coach')
                                                 {{ $appointment->client->name }}
                                             @else
                                                 {{ $appointment->coach->name }}
                                             @endif
                                         </td>
-                                        <td>{{ $appointment->date }}</td>
-                                        <td>{{ implode(', ', $appointment->hours) }}</td>
-                                        <td>{{ $appointment->created_at->format('d-m-Y H:i') }}</td>
+                                        <td class="p-1">{{ $appointment->date }}</td>
+                                        <td class="p-1">
+                                            {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }}</td>
+                                        <td class="p-1">
+                                            {{ \Carbon\Carbon::parse($appointment->date . ' ' . $appointment->start)->diffForHumans() }}
+                                        </td>
+                                        <td class="p-1">{{ $appointment->created_at->format('d-m-Y H:i') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
