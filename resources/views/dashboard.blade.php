@@ -139,7 +139,7 @@
                                 x-bind:disabled="!available">
                                 @for ($i = 0; $i < 24; $i++)
                                     <option value="{{ sprintf('%02d', $i) }}:00"
-                                        {{ $availability && substr($availability->start_time, 0, 2) == sprintf('%02d', $i) ? 'selected' : '' }}>
+                                        {{ ($availability && substr($availability->start_time, 0, 2) == sprintf('%02d', $i)) || (!$availability && $i == 9) ? 'selected' : '' }}>
                                         {{ sprintf('%02d', $i) }}:00</option>
                                 @endfor
                             </select>
@@ -148,7 +148,7 @@
                                 x-bind:disabled="!available">
                                 @for ($i = 0; $i < 24; $i++)
                                     <option value="{{ sprintf('%02d', $i) }}:00"
-                                        {{ $availability && substr($availability->end_time, 0, 2) == sprintf('%02d', $i) ? 'selected' : '' }}>
+                                        {{ ($availability && substr($availability->end_time, 0, 2) == sprintf('%02d', $i)) || (!$availability && $i == 12) ? 'selected' : '' }}>
                                         {{ sprintf('%02d', $i) }}:00</option>
                                 @endfor
                             </select>
