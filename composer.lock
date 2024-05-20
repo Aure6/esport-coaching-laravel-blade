@@ -2613,20 +2613,20 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
@@ -2650,7 +2650,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -2662,9 +2662,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-factory"
             },
-            "time": "2023-04-10T20:10:41+00:00"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -6513,16 +6513,16 @@
         },
         {
             "name": "laravel-lang/actions",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/actions.git",
-                "reference": "363e07c87d9d78470e27534c4b7593f41388f711"
+                "reference": "aed921f3991d2c84f9e575ed80534c068db9602b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/363e07c87d9d78470e27534c4b7593f41388f711",
-                "reference": "363e07c87d9d78470e27534c4b7593f41388f711",
+                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/aed921f3991d2c84f9e575ed80534c068db9602b",
+                "reference": "aed921f3991d2c84f9e575ed80534c068db9602b",
                 "shasum": ""
             },
             "require": {
@@ -6574,22 +6574,22 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/actions/issues",
-                "source": "https://github.com/Laravel-Lang/actions/tree/1.8.1"
+                "source": "https://github.com/Laravel-Lang/actions/tree/1.8.2"
             },
-            "time": "2024-05-06T08:48:33+00:00"
+            "time": "2024-05-14T06:56:27+00:00"
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "2.10.4",
+            "version": "2.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "e008f24e75fd52f2e4748ebb16c184bd40eb19e9"
+                "reference": "01d92b752802062c533efc2e49d608702a8644f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/e008f24e75fd52f2e4748ebb16c184bd40eb19e9",
-                "reference": "e008f24e75fd52f2e4748ebb16c184bd40eb19e9",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/01d92b752802062c533efc2e49d608702a8644f4",
+                "reference": "01d92b752802062c533efc2e49d608702a8644f4",
                 "shasum": ""
             },
             "require": {
@@ -6643,9 +6643,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/2.10.4"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/2.10.5"
             },
-            "time": "2024-05-06T07:00:28+00:00"
+            "time": "2024-05-13T15:52:47+00:00"
         },
         {
             "name": "laravel-lang/common",
@@ -6732,16 +6732,16 @@
         },
         {
             "name": "laravel-lang/http-statuses",
-            "version": "3.8.2",
+            "version": "3.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/http-statuses.git",
-                "reference": "b408ea74292df2e4fbec2be93858a3e697189b29"
+                "reference": "2f19b67fcdb2134804b0b8ee399f5abab4720d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/b408ea74292df2e4fbec2be93858a3e697189b29",
-                "reference": "b408ea74292df2e4fbec2be93858a3e697189b29",
+                "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/2f19b67fcdb2134804b0b8ee399f5abab4720d9a",
+                "reference": "2f19b67fcdb2134804b0b8ee399f5abab4720d9a",
                 "shasum": ""
             },
             "require": {
@@ -6793,9 +6793,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/http-statuses/issues",
-                "source": "https://github.com/Laravel-Lang/http-statuses/tree/3.8.2"
+                "source": "https://github.com/Laravel-Lang/http-statuses/tree/3.8.3"
             },
-            "time": "2024-03-11T01:33:17+00:00"
+            "time": "2024-04-22T14:47:25+00:00"
         },
         {
             "name": "laravel-lang/json-fallback",
@@ -6850,22 +6850,25 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.2.2",
+            "version": "15.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "3773f176de3e1f157d95fecb32556c65fd02294b"
+                "reference": "35115f9f62d5196a3dea510e25eae6a30da7653c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/3773f176de3e1f157d95fecb32556c65fd02294b",
-                "reference": "3773f176de3e1f157d95fecb32556c65fd02294b",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/35115f9f62d5196a3dea510e25eae6a30da7653c",
+                "reference": "35115f9f62d5196a3dea510e25eae6a30da7653c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "laravel-lang/publisher": "^16.0",
                 "php": "^8.2"
+            },
+            "conflict": {
+                "laravel/framework": "<11.0.7"
             },
             "require-dev": {
                 "laravel-lang/status-generator": "^2.11",
@@ -6906,7 +6909,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-05-06T09:53:28+00:00"
+            "time": "2024-05-16T09:29:50+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -7532,16 +7535,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.11",
+            "version": "1.6.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "81a161d0b135df89951abd52296adf97deb0723d"
+                "reference": "1f4efdd7d3beafe9807b08156dfcb176d18f1699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/81a161d0b135df89951abd52296adf97deb0723d",
-                "reference": "81a161d0b135df89951abd52296adf97deb0723d",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/1f4efdd7d3beafe9807b08156dfcb176d18f1699",
+                "reference": "1f4efdd7d3beafe9807b08156dfcb176d18f1699",
                 "shasum": ""
             },
             "require": {
@@ -7611,7 +7614,7 @@
                 "security": "https://github.com/mockery/mockery/security/advisories",
                 "source": "https://github.com/mockery/mockery"
             },
-            "time": "2024-03-21T18:34:15+00:00"
+            "time": "2024-05-16T03:13:13+00:00"
         },
         {
             "name": "myclabs/deep-copy",

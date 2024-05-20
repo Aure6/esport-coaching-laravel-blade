@@ -17,7 +17,7 @@ class DashboardController extends Controller
             ->orWhere('coach_id', $user->id)
             ->get();
 
-        if ($user->role->name = "Coach") {
+        if ($user->role->name === "Coach") {
             $availabilities = Availability::where('coach_id', $user->id)->get();
             // dd($availabilities);
             return view('dashboard', compact('appointments', 'availabilities'));
@@ -38,7 +38,9 @@ class DashboardController extends Controller
 
         // Update the user's role...
         $user->role_id = $request->role_id;
+        // dd($request);
         $user->save();
+        // dd($request);
 
         // Redirect the user...
         // return redirect()->route('dashboard')->with('status', 'Role updated successfully!');
