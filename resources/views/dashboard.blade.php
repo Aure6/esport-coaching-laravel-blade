@@ -128,14 +128,15 @@
                         @php
                             $availability = $availabilities->firstWhere('day_of_week', $day);
                         @endphp
-                        <div class="p-2 my-2 bg-gray-500 availability-day">
+                        <div x-data="{ available: {{ $availability ? 'true' : 'false' }} }" class="p-2 my-2 bg-gray-500 availability-day">
                             <h4 class="font-semibold text-lime-500">{{ $day }}</h4>
-                            <input type="checkbox" id="{{ strtolower($day) }}_checkbox"
-                                name="{{ strtolower($day) }}_checkbox" {{ $availability ? 'checked' : '' }}
-                                class=" text-lime-500">
+                            <input x-bind:checked="available" x-on:click="available = !available" type="checkbox"
+                                id="{{ strtolower($day) }}_checkbox" name="{{ strtolower($day) }}_checkbox"
+                                {{ $availability ? 'checked' : '' }} class=" text-lime-500">
                             <label for="{{ strtolower($day) }}_checkbox">Disponible</label>
                             <label for="{{ strtolower($day) }}_start">Heure de début:</label>
-                            <select id="{{ strtolower($day) }}_start" name="{{ strtolower($day) }}_start">
+                            <select id="{{ strtolower($day) }}_start" name="{{ strtolower($day) }}_start"
+                                x-bind:disabled="!available">
                                 @for ($i = 0; $i < 24; $i++)
                                     <option value="{{ sprintf('%02d', $i) }}:00"
                                         {{ $availability && substr($availability->start_time, 0, 2) == sprintf('%02d', $i) ? 'selected' : '' }}>
@@ -143,7 +144,8 @@
                                 @endfor
                             </select>
                             <label for="{{ strtolower($day) }}_end">Heure de fin:</label>
-                            <select id="{{ strtolower($day) }}_end" name="{{ strtolower($day) }}_end">
+                            <select id="{{ strtolower($day) }}_end" name="{{ strtolower($day) }}_end"
+                                x-bind:disabled="!available">
                                 @for ($i = 0; $i < 24; $i++)
                                     <option value="{{ sprintf('%02d', $i) }}:00"
                                         {{ $availability && substr($availability->end_time, 0, 2) == sprintf('%02d', $i) ? 'selected' : '' }}>
