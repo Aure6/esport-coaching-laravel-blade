@@ -102,7 +102,7 @@
                                                     name="hours[]" value="{{ $date }}-{{ $hour }}"
                                                     class="hidden hourCheckbox text-lime-500 focus:ring-lime-600 peer ">
                                                 <label for="{{ $date }}-{{ $hour }}"
-                                                    class="inline-flex items-center justify-between w-full p-2 text-gray-400 bg-gray-800 border-2 border-gray-700 rounded-lg cursor-pointer peer-checked:text-lime-300 hover:text-gray-300 peer-checked:border-lime-500 hover:bg-gray-700">{{ $hour }}</label>
+                                                    class="inline-flex items-center justify-between w-full p-2 text-gray-400 bg-gray-800 border-2 border-gray-700 rounded-lg cursor-pointer peer-checked:text-lime-300 hover:text-gray-300 peer-checked:border-lime-500 peer-checked:bg-gray-700 hover:bg-gray-700">{{ $hour }}</label>
                                             </div>
                                         @endforeach
                                     @endif
@@ -111,7 +111,7 @@
 
                             <div class="flex justify-center">
                                 <x-primary-button type="submit" id="submitButton" disabled
-                                    class="cursor-not-allowed">Réserver</x-primary-button>
+                                    class="mt-2 cursor-not-allowed">Réserver</x-primary-button>
                             </div>
                         </form>
 
