@@ -1,3 +1,3 @@
-<h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">
+<h2 class="text-2xl font-bold leading-tight tracking-wide uppercase text-lime-500">
     {{ $slot }}
-</h3>
+</h2>

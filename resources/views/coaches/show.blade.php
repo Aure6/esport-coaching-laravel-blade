@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-slot name="header">
-        <h2 class="text-3xl font-semibold leading-tight text-gray-800 uppercase">
+        <h1 class="text-3xl font-semibold leading-tight text-gray-800 uppercase">
             {{ $coach->name }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="py-12">
