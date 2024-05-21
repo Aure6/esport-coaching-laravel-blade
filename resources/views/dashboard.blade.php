@@ -12,14 +12,16 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="flex">
-                <button :class="{ 'bg-lime-500 text-white': tab === 'tab1' }" class="px-4 py-2 hover:bg-lime-400"
+            <div
+                class="flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                <button :class="{ 'bg-lime-500 text-white': tab === 'tab1' }"
+                    class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                     @click="tab = 'tab1'">Rendez-vous</button>
                 @if (Auth::user()->role->name === 'Coach')
                     <button :class="{ 'bg-lime-500 text-white': tab === 'tab2' }"
                         class="px-4 py-2 hover:bg-lime-400" @click="tab = 'tab2'">Disponibilités</button>
                 @endif
-                <button :class="{ 'bg-lime-500 text-white': tab === 'tab3' }" class="px-4 py-2 hover:bg-lime-400"
+                <button :class="{ 'bg-lime-500 text-white': tab === 'tab3' }" class="p-4 hover:bg-lime-400"
                     @click="tab = 'tab3'">Rôle</button>
             </div>
 
@@ -105,7 +107,8 @@
                                                 {{ $appointment->coach->name }}
                                             @endif
                                         </td>
-                                        <td class="p-1">{{ $appointment->date }}</td>
+                                        <td class="p-1">
+                                            {{ \Carbon\Carbon::parse($appointment->date)->format('d-m-Y') }}</td>
                                         <td class="p-1">
                                             {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }}</td>
                                         <td class="p-1">
