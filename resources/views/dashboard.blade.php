@@ -81,9 +81,9 @@
                     @if ($appointments->isEmpty())
                         <p>No appointments found.</p>
                     @else
-                        <div>
+                        <ul>
                             @foreach ($appointments as $appointment)
-                                <div
+                                <li
                                     class="sm:grid grid-flow-col auto-cols-fr border hover:bg-gray-200 even:bg-gray-100 odd:bg-white divide-gray-200 > * divide-x-2 > *">
                                     {{-- <td class="p-1">
                                             @if (Auth::user()->role->name === 'Coach')
@@ -121,7 +121,7 @@
                                             Annuler
                                         </button>
                                     </div>
-                                </div>
+                                </li>
                                 <!-- Modal -->
                                 <x-modal name="confirm-appointment-deletion" :show="$errors->appointmentDeletion->isNotEmpty()"
                                     @open-modal.window="if ($event.detail === 'confirm-appointment-deletion') show = true"
@@ -153,7 +153,7 @@
                                     </form>
                                 </x-modal>
                             @endforeach
-                        </div>
+                        </ul>
                     @endif
                 </div>
             </div>
