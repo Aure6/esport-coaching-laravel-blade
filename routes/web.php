@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     // Route::post('/availabilities', 'AvailabilityController@update')->name('availabilities.update');
     Route::post('/availabilities.update', [AvailabilityController::class, 'update'])->name('availabilities.update');
 
+    Route::delete('/appointments/store', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
+
     Route::post('/user/updateRole', [DashboardController::class, 'updateRole'])->name('user.updateRole');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -81,44 +81,79 @@
                     @if ($appointments->isEmpty())
                         <p>No appointments found.</p>
                     @else
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Utilisateurs
-                                        {{-- @if (Auth::user()->role->name == 'coach')
-                                            Client
-                                        @else
-                                            Coach
-                                        @endif --}}
-                                    </th>
-                                    <th>Date</th>
-                                    <th>Heure</th>
-                                    <th></th>
-                                    <th>Planifié le</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($appointments as $appointment)
-                                    <tr class="border hover:bg-gray-200 even:bg-gray-100 odd:bg-white">
-                                        <td class="p-1">
-                                            @if (Auth::user()->role->name == 'coach')
+                        <div>
+                            @foreach ($appointments as $appointment)
+                                <div
+                                    class="sm:grid grid-flow-col auto-cols-fr border hover:bg-gray-200 even:bg-gray-100 odd:bg-white divide-gray-200 > * divide-x-2 > *">
+                                    {{-- <td class="p-1">
+                                            @if (Auth::user()->role->name === 'Coach')
                                                 {{ $appointment->client->name }}
                                             @else
                                                 {{ $appointment->coach->name }}
                                             @endif
-                                        </td>
-                                        <td class="p-1">
-                                            {{ \Carbon\Carbon::parse($appointment->date)->format('d-m-Y') }}</td>
-                                        <td class="p-1">
-                                            {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }}</td>
-                                        <td class="p-1">
+                                        </td> --}}
+                                    <div class="">
+                                        <div class="p-1">Coach: {{ $appointment->coach->name }}</div>
+                                        <div class="p-1">Joueur: {{ $appointment->client->name }}</div>
+                                    </div>
+                                    <div class="flex items-center justify-center p-1">
+                                        <div class="">
+                                            {{ \Carbon\Carbon::parse($appointment->date)->format('d-m-Y') }}
+                                            {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }},
                                             {{ \Carbon\Carbon::parse($appointment->date . ' ' . $appointment->start)->diffForHumans() }}
-                                        </td>
-                                        <td class="p-1">{{ $appointment->created_at->format('d-m-Y H:i') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center p-1">
+                                        <div class="">Planifié le
+                                            {{ $appointment->updated_at->format('d-m-Y') }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center p-1">
+                                        <button type="submit" x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-appointment-deletion')"
+                                            class="m-auto text-red-500 transition-all duration-200 rounded hover:ring-red-500 hover:ring-2 hover:text-white hover:bg-red-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="inline-block w-6 h-6">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                                <x-modal name="confirm-appointment-deletion" :show="$errors->appointmentDeletion->isNotEmpty()"
+                                    @open-modal.window="if ($event.detail === 'confirm-appointment-deletion') show = true"
+                                    @close-modal.window="if ($event.detail === 'confirm-appointment-deletion') show = false"
+                                    focusable>
+                                    <form method="post" action="{{ route('appointments.destroy', $appointment->id) }}"
+                                        class="p-6">
+                                        @csrf
+                                        @method('delete')
+
+                                        <h2 class="text-lg font-medium text-gray-900">
+                                            {{ __('Are you sure you want to delete this appointment?') }}
+                                        </h2>
+
+                                        <p class="mt-1 text-sm text-gray-600">
+                                            {{ __('Once this appointment is deleted, all of its data will be permanently deleted.') }}
+                                        </p>
+
+                                        <div class="flex justify-end mt-6">
+                                            <x-secondary-button
+                                                x-on:click="$dispatch('close-modal', 'confirm-appointment-deletion')">
+                                                {{ __('Cancel') }}
+                                            </x-secondary-button>
+
+                                            <x-danger-button class="ms-3">
+                                                {{ __('Delete Appointment') }}
+                                            </x-danger-button>
+                                        </div>
+                                    </form>
+                                </x-modal>
+                            @endforeach
+                        </div>
                     @endif
                 </div>
             </div>
