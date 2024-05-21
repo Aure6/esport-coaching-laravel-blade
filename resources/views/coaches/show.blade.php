@@ -72,7 +72,7 @@
                                     <input type="radio" id="{{ $date }}" name="date"
                                         value="{{ $date }}" class="hidden peer" required />
                                     <label for="{{ $date }}"
-                                        class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 dark:peer-checked:bg-gray-700 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                        class="inline-flex items-center justify-between w-full p-2 text-gray-400 bg-gray-800 border border-gray-700 cursor-pointer peer-checked:text-lime-300 peer-checked:bg-gray-700 peer-checked:border-lime-500 hover:text-gray-300 hover:bg-gray-700">
                                         <div class="block">
                                             {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
                                             <div class="w-full">{{ __('days.' . $dayName) }} {{ $displayedDate }}</div>
@@ -97,12 +97,12 @@
                                     @else
                                         <p>Durée d'un service: 1 heure.</p>
                                         @foreach ($hours as $hour)
-                                            <div class="hour">
+                                            <div class="inline-block hour">
                                                 <input type="checkbox" id="{{ $date }}-{{ $hour }}"
                                                     name="hours[]" value="{{ $date }}-{{ $hour }}"
-                                                    class="hourCheckbox text-lime-500 focus:ring-lime-600">
-                                                <label
-                                                    for="{{ $date }}-{{ $hour }}">{{ $hour }}</label>
+                                                    class="hidden hourCheckbox text-lime-500 focus:ring-lime-600 peer ">
+                                                <label for="{{ $date }}-{{ $hour }}"
+                                                    class="inline-flex items-center justify-between w-full p-2 text-gray-400 bg-gray-800 border-2 border-gray-700 rounded-lg cursor-pointer peer-checked:text-lime-300 hover:text-gray-300 peer-checked:border-lime-500 hover:bg-gray-700">{{ $hour }}</label>
                                             </div>
                                         @endforeach
                                     @endif
