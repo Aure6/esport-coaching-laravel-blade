@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-neutral-900">
         <nav class="bg-black border-gray-200 px-4 lg:px-6 py-2.5">
             <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
                 <div class="flex lg:justify-center lg:col-start-2">
@@ -63,7 +63,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="text-white ">
             {{ $slot }}
         </main>
     </div>

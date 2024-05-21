@@ -80,4 +80,13 @@ class AppointmentController extends Controller
         return redirect()->route('dashboard.index')->with('success', 'Le rendez-vous a été pris avec succès.');
         // return redirect()->route('appointments.index')->with('success', 'Appointment has been created successfully.');
     }
+
+    public function destroy($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        $appointment->delete();
+
+        // return redirect()->back()->with('success', 'Appointment deleted successfully');
+        return redirect()->back()->with('success', 'Rendez-vous supprimé avec succès');
+    }
 }

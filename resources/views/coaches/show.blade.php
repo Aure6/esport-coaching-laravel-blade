@@ -8,8 +8,8 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-6 overflow-hidden md:grid-cols-3">
-                <section class="col-span-1 gap-4 p-6 space-y-8 text-lg text-white uppercase bg-neutral-700">
-                    <div class="flex flex-row">
+                <section class="gap-4 p-6 space-y-8 text-lg text-white uppercase md:col-span-1 bg-neutral-800 h-fit">
+                    <div class="flex flex-row space-x-2">
                         <x-avatar class="w-20 h-20" :user="$coach" />
                         <div>
                             <div>{{ $coach->name }}</div>
@@ -19,19 +19,22 @@
                     {{-- <div>Coach depuis {{ $coach->created_at->diffForHumans() }}</div> --}}
                     <div>Coach depuis {{ $coach->created_at_date }}</div>
                     <section>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Succès</h3>
+                        <x-section-title
+                            class="text-2xl font-semibold leading-tight uppercase text-lime-500">Succès</x-section-title>
                         <ul>
                             <li>1ère place tournoi 1v1</li>
                         </ul>
                     </section>
                     <section>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Langues</h3>
+                        <x-section-title
+                            class="text-2xl font-semibold leading-tight uppercase text-lime-500">Langues</x-section-title>
                         <div>Français</div>
                     </section>
                 </section>
-                <section class="col-span-2 gap-4 space-y-8 text-lg text-white ">
-                    <section class="p-6 bg-neutral-700">
-                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</h3>
+                <section class="gap-4 space-y-8 text-lg text-white md:col-span-2 ">
+                    <section class="p-6 bg-neutral-800">
+                        <x-section-title
+                            class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</x-section-title>
                         @if ($errors->any())
                             <div class="bg-red-500">
                                 <ul>
@@ -165,15 +168,17 @@
                             });
                         </script>
                     </section>
-                    <section class='p-6 bg-neutral-700'>
-                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">A propos</h3>
+                    <section class='p-6 bg-neutral-800'>
+                        <x-section-title class="text-2xl font-semibold leading-tight uppercase text-lime-500">A
+                            propos</x-section-title>
                         <div>{{ $coach->bio }}</div>
                     </section>
-                    <section class="p-6 bg-neutral-700">
-                        <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Avis</h3>
+                    <section class="p-6 bg-neutral-800">
+                        <x-section-title
+                            class="text-2xl font-semibold leading-tight uppercase text-lime-500">Avis</x-section-title>
                         <ul class="space-y-4">
                             @foreach ($coach->reviews as $review)
-                                <li class="text-white bg-neutral-700">
+                                <li class="text-white bg-neutral-800">
                                     <div>{{ $review->text }}</div>
                                     <div class="text-sm">par <span class="italic">{{ $review->client_name }}</span>
                                         le

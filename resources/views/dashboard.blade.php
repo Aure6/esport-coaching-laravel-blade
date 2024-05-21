@@ -127,7 +127,8 @@
                                     @open-modal.window="if ($event.detail === 'confirm-appointment-deletion') show = true"
                                     @close-modal.window="if ($event.detail === 'confirm-appointment-deletion') show = false"
                                     focusable>
-                                    <form method="post" action="{{ route('appointments.destroy', $appointment->id) }}"
+                                    <form method="post"
+                                        action="{{ route('appointments.destroy', ['id' => $appointment->id]) }}"
                                         class="p-6">
                                         @csrf
                                         @method('delete')
