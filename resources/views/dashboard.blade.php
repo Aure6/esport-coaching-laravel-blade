@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center justify-center p-1">
-                                        <button type="submit" x-data=""
+                                        <button x-data=""
                                             x-on:click.prevent="$dispatch('open-modal', 'confirm-appointment-deletion')"
                                             class="m-auto text-red-500 transition-all duration-200 rounded hover:ring-red-500 hover:ring-2 hover:text-white hover:bg-red-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
