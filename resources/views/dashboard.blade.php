@@ -84,7 +84,7 @@
                         <ul>
                             @foreach ($appointments as $appointment)
                                 <li
-                                    class="sm:grid grid-flow-col auto-cols-fr border hover:bg-gray-200 even:bg-gray-100 odd:bg-white divide-gray-200 > * divide-x-2 > *">
+                                    class="sm:grid grid-flow-col auto-cols-fr border hover:bg-gray-200 even:bg-gray-100 odd:bg-white divide-gray-200 > * sm:divide-x-2 > *">
                                     {{-- <td class="p-1">
                                             @if (Auth::user()->role->name === 'Coach')
                                                 {{ $appointment->client->name }}
@@ -99,7 +99,7 @@
                                     <div class="flex items-center justify-center p-1">
                                         <div class="">
                                             {{ \Carbon\Carbon::parse($appointment->date)->format('d-m-Y') }}
-                                            {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }},
+                                            {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }}<br>
                                             {{ \Carbon\Carbon::parse($appointment->date . ' ' . $appointment->start)->diffForHumans() }}
                                         </div>
                                     </div>
