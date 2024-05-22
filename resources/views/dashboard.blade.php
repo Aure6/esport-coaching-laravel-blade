@@ -162,8 +162,9 @@
 
             @if (Auth::user()->role->name == 'Coach')
                 <div x-show="tab === 'tab2'"
-                    class="flex flex-col items-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
-                    <div>
+                    class="flex flex-col items-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm sm:w-fit bg-neutral-800 sm:rounded-lg">
+                    <x-section-title class="self-start">Disponibilités</x-section-title>
+                    <div class="self-start">
                         Un service dure une heure.
                     </div>
                     <form method="POST" action="{{ route('availabilities.update') }}" class="">
