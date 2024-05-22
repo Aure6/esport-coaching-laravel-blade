@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-black border-b border-gray-700 text-neutral-200">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -7,7 +7,7 @@
                 <div class="flex items-center shrink-0">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo
-                            class="block w-auto text-gray-800 duration-200 fill-current h-9 hover:scale-105" />
+                            class="block w-auto text-gray-100 duration-200 fill-current h-9 hover:scale-105" />
                     </a>
                 </div>
 

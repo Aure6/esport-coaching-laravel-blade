@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <h1>
             {{ __('Dashboard') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="py-12">
@@ -12,16 +12,17 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div
-                class="flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-                <button :class="{ 'bg-lime-500 text-white': tab === 'tab1' }"
-                    class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+            <div class="flex p-2 text-sm font-medium text-center text-gray-400 rounded-lg bg-neutral-800">
+                <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab1' }"
+                    class="inline-block p-4 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
                     @click="tab = 'tab1'">Rendez-vous</button>
                 @if (Auth::user()->role->name === 'Coach')
-                    <button :class="{ 'bg-lime-500 text-white': tab === 'tab2' }"
-                        class="px-4 py-2 hover:bg-lime-400" @click="tab = 'tab2'">Disponibilités</button>
+                    <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab2' }"
+                        class="px-4 py-2 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
+                        @click="tab = 'tab2'">Disponibilités</button>
                 @endif
-                <button :class="{ 'bg-lime-500 text-white': tab === 'tab3' }" class="p-4 hover:bg-lime-400"
+                <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab3' }"
+                    class="p-4 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
                     @click="tab = 'tab3'">Rôle</button>
             </div>
 
@@ -31,7 +32,7 @@
                 </div>
             </div> --}}
 
-            <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden bg-white shadow-sm sm:rounded-lg">
+            <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
                 <form method="POST" action="{{ route('user.updateRole') }}">
                     @csrf
@@ -74,17 +75,17 @@
                 </form>
             </div>
 
-            <div x-show="tab === 'tab1'" class="p-6 mx-auto overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rendez-vous</h3>
+            <div x-show="tab === 'tab1'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+                <x-section-title>Rendez-vous</x-section-title>
 
                 <div class="card-body">
                     @if ($appointments->isEmpty())
                         <p>No appointments found.</p>
                     @else
-                        <ul>
+                        <ul class="space-y-1">
                             @foreach ($appointments as $appointment)
                                 <li
-                                    class="sm:grid grid-flow-col auto-cols-fr border hover:bg-gray-200 even:bg-gray-100 odd:bg-white divide-gray-200 > * sm:divide-x-2 > *">
+                                    class="sm:grid grid-flow-col auto-cols-fr hover:bg-neutral-600 divide-gray-200 > *  bg-neutral-700 sm:rounded-lg">
                                     {{-- <td class="p-1">
                                             @if (Auth::user()->role->name === 'Coach')
                                                 {{ $appointment->client->name }}
@@ -92,7 +93,7 @@
                                                 {{ $appointment->coach->name }}
                                             @endif
                                         </td> --}}
-                                    <div class="">
+                                    <div class="px-1 py-2">
                                         <div class="p-1">Coach: {{ $appointment->coach->name }}</div>
                                         <div class="p-1">Joueur: {{ $appointment->client->name }}</div>
                                     </div>
