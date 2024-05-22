@@ -16,8 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-neutral-900">
+<body class="font-sans antialiasedbg-neutral-900 text-neutral-200">
+    <div class="min-h-screen">
         <nav class="bg-black border-gray-200 px-4 lg:px-6 py-2.5">
             <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto">
                 <div class="flex lg:justify-center lg:col-start-2">
@@ -63,12 +63,12 @@
         @endif
 
         <!-- Page Content -->
-        <main class="text-white ">
+        <main class="">
             {{ $slot }}
         </main>
     </div>
 
-    <footer class="py-16 text-sm text-center text-white bg-black">
+    <footer class="py-16 text-sm text-center bg-black">
         <a href="">Mentions légales</a>
         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
     </footer>

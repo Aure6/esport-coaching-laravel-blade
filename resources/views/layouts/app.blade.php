@@ -16,8 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-neutral-900">
+<body class="font-sans antialiased bg-neutral-900 text-neutral-200">
+    <div class="min-h-screen ">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -30,10 +30,15 @@
         @endif
 
         <!-- Page Content -->
-        <main class="text-white">
+        <main class="text-neutral-200">
             {{ $slot }}
         </main>
     </div>
+
+    <footer class="py-16 text-sm text-center bg-black">
+        <a href="">Mentions légales</a>
+        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+    </footer>
 </body>
 
 </html>

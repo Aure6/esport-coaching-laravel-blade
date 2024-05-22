@@ -161,17 +161,19 @@
             </div>
 
             @if (Auth::user()->role->name == 'Coach')
-                <div x-show="tab === 'tab2'" class="p-6 mx-auto overflow-hidden bg-gray-600 shadow-sm sm:rounded-lg">
+                <div x-show="tab === 'tab2'"
+                    class="flex flex-col items-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                     <div>
                         Un service dure une heure.
                     </div>
-                    <form method="POST" action="{{ route('availabilities.update') }}">
+                    <form method="POST" action="{{ route('availabilities.update') }}" class="">
                         @csrf
                         @foreach (['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] as $day)
                             @php
                                 $availability = $availabilities->firstWhere('day_of_week', $day);
                             @endphp
-                            <div x-data="{ available: {{ $availability ? 'true' : 'false' }} }" class="p-2 my-2 bg-gray-500 availability-day">
+                            <div x-data="{ available: {{ $availability ? 'true' : 'false' }} }"
+                                class="p-2 my-2 rounded-lg bg-neutral-700 availability-day w-fit">
                                 <div>
                                     <input x-bind:checked="available" x-on:click="available = !available"
                                         type="checkbox" id="{{ strtolower($day) }}_checkbox"
@@ -180,19 +182,19 @@
                                     <label for="{{ strtolower($day) }}_checkbox"
                                         class="text-lg font-semibold text-lime-500">{{ $day }}</label>
                                 </div>
-                                <label for="{{ strtolower($day) }}_start">Heure de début:</label>
+                                <label for="{{ strtolower($day) }}_start">De</label>
                                 <select id="{{ strtolower($day) }}_start" name="{{ strtolower($day) }}_start"
-                                    x-bind:disabled="!available">
+                                    x-bind:disabled="!available" class="text-neutral-800">
                                     @for ($i = 0; $i < 24; $i++)
                                         <option value="{{ sprintf('%02d', $i) }}:00"
                                             {{ ($availability && substr($availability->start_time, 0, 2) == sprintf('%02d', $i)) || (!$availability && $i == 9) ? 'selected' : '' }}>
                                             {{ sprintf('%02d', $i) }}:00</option>
                                     @endfor
                                 </select>
-                                <span>-></span>
-                                <label for="{{ strtolower($day) }}_end">Heure de fin:</label>
+                                {{-- <span>-></span> --}}
+                                <label for="{{ strtolower($day) }}_end">à</label>
                                 <select id="{{ strtolower($day) }}_end" name="{{ strtolower($day) }}_end"
-                                    x-bind:disabled="!available">
+                                    x-bind:disabled="!available" class="text-neutral-800">
                                     @for ($i = 0; $i < 24; $i++)
                                         <option value="{{ sprintf('%02d', $i) }}:00"
                                             {{ ($availability && substr($availability->end_time, 0, 2) == sprintf('%02d', $i)) || (!$availability && $i == 12) ? 'selected' : '' }}>
@@ -204,6 +206,25 @@
                         <div class="flex justify-center">
                             <x-primary-button type="submit">Enregistrer les disponibilités</x-primary-button>
                         </div>
+                        <script>
+                            // const selectElements = document.querySelectorAll('select');
+
+                            // selectElements.forEach(function(selectElement) {
+                            //     selectElement.addEventListener('change', function() {
+                            //         if (this.disabled) {
+                            //             this.classList.remove('text-black');
+                            //             this.classList.remove('cursor-default');
+                            //             this.classList.add('text-gray-800');
+                            //             this.classList.add('cursor-not-allowed');
+                            //         } else {
+                            //             this.classList.remove('text-gray-800');
+                            //             this.classList.remove('cursor-not-allowed');
+                            //             this.classList.add('text-black');
+                            //             this.classList.add('cursor-default');
+                            //         }
+                            //     });
+                            // });
+                        </script>
                     </form>
                 </div>
             @endif
