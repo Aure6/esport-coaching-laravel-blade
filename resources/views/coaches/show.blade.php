@@ -54,145 +54,179 @@
                                 <ul>
                                     @php
                                         $weekNumber = 0;
+                                        $currentMonthYear = '';
+                                        $months = [
+                                            'January' => 'janvier',
+                                            'February' => 'février',
+                                            'March' => 'mars',
+                                            'April' => 'avril',
+                                            'May' => 'mai',
+                                            'June' => 'juin',
+                                            'July' => 'juillet',
+                                            'August' => 'août',
+                                            'September' => 'septembre',
+                                            'October' => 'octobre',
+                                            'November' => 'novembre',
+                                            'December' => 'décembre',
+                                        ];
                                     @endphp
                                     @forelse ($availabilities as $date => $hours)
                                         @php
-                                            $displayedDate = date('d-m-Y', strtotime($date));
+                                            $displayedDate = date('d-m', strtotime($date));
                                             $dayName = date('l', strtotime($date));
                                             $currentWeekNumber = \Carbon\Carbon::parse($date)->weekOfYear;
+                                            $monthYear = ucfirst(
+                                                $months[date('F', strtotime($date))] .
+                                                    ' ' .
+                                                    date('Y', strtotime($date)),
+                                            );
                                         @endphp
-                                        @if ($currentWeekNumber !== $weekNumber)
-                                            @if ($weekNumber !== 0)
+
+                                        @if ($monthYear !== $currentMonthYear)
+                                            @if ($currentMonthYear !== '')
                             </div> <!-- Close the previous week div -->
                             @endif
-                            <div class="flex flex-col sm:flex-row sm:justify-around"> <!-- Open a new week div -->
-                                @php
-                                    $weekNumber = $currentWeekNumber;
-                                @endphp
-                                @endif
-                                <li class="w-full">
-                                    <input type="radio" id="{{ $date }}" name="date"
-                                        value="{{ $date }}" class="hidden peer" required />
-                                    <label for="{{ $date }}"
-                                        class="inline-flex items-center justify-between w-full p-2 rounded-full cursor-pointer text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
-                                        <div class="block mx-auto">
-                                            {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
-                                            <div class="w-full">{{ substr(__('days.' . $dayName), 0, 3) }}
-                                                {{ $displayedDate }}</div>
-                                        </div>
-                                    </label>
-                                </li>
-                            @empty
-                                <div>
-                                    {{ __('Aucun disponibilité trouvé pour le moment pour le coach ' . $coach->name . '.') }}
-                                </div>
-                                @endforelse
-                            </div> <!-- Close the last week div -->
-                            </ul>
-
-                            @foreach ($availabilities as $date => $hours)
-                                <div class="day" id="{{ $date }}" style="display: none;">
-                                    {{-- <h4>{{ __('days.' . $day) }}</h4> --}}
-                                    <legend>Sélectionne un ou plusieurs slots d'heure pour le jour sélectionné</legend>
-
-                                    @if (empty($hours))
-                                        <p>No availability on this day.</p>
-                                    @else
-                                        <p>Durée d'un service: 1 heure.</p>
-                                        @foreach ($hours as $hour)
-                                            <div class="inline-block hour">
-                                                <input type="checkbox" id="{{ $date }}-{{ $hour }}"
-                                                    name="hours[]" value="{{ $date }}-{{ $hour }}"
-                                                    class="hidden hourCheckbox text-lime-500 focus:ring-lime-600 peer ">
-                                                <label for="{{ $date }}-{{ $hour }}"
-                                                    class="inline-flex items-center justify-between w-full p-2 rounded-full cursor-pointer text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">{{ $hour }}</label>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            @endforeach
-
-                            <div class="flex justify-center">
-                                <x-primary-button type="submit" id="submitButton" disabled
-                                    class="mt-2 cursor-not-allowed">Réserver</x-primary-button>
+                            <div class="w-full text-xl font-bold text-center month-year-header">
+                                {{ $monthYear }}
                             </div>
-                        </form>
+                            @php
+                                $currentMonthYear = $monthYear;
+                                $weekNumber = 0; // Reset week number for new month
+                            @endphp
+                            @endif
 
+                            @if ($currentWeekNumber !== $weekNumber)
+                                @if ($weekNumber !== 0)
+            </div> <!-- Close the previous week div -->
+            @endif
+            <div class="flex flex-col sm:flex-row sm:justify-around"> <!-- Open a new week div -->
+                @php
+                    $weekNumber = $currentWeekNumber;
+                @endphp
+                @endif
+                <li class="w-full">
+                    <input type="radio" id="{{ $date }}" name="date" value="{{ $date }}"
+                        class="hidden peer" required />
+                    <label for="{{ $date }}"
+                        class="inline-flex items-center justify-between w-full p-2 rounded-full cursor-pointer text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
+                        <div class="block mx-auto">
+                            {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
+                            <div class="w-full">{{ substr(__('days.' . $dayName), 0, 3) }}
+                                {{ $displayedDate }}</div>
+                        </div>
+                    </label>
+                </li>
+            @empty
+                <div>
+                    {{ __('Aucun disponibilité trouvé pour le moment pour le coach ' . $coach->name . '.') }}
+                </div>
+                @endforelse
+            </div> <!-- Close the last week div -->
+            </ul>
 
-                        <script>
-                            // Get all the radio buttons and hour checkboxes
-                            var radios = document.querySelectorAll('input[type=radio][name="date"]');
-                            var hourCheckboxes = document.querySelectorAll('.hourCheckbox');
-                            var submitButton = document.getElementById('submitButton');
+            @foreach ($availabilities as $date => $hours)
+                <div class="day" id="{{ $date }}" style="display: none;">
+                    {{-- <h4>{{ __('days.' . $day) }}</h4> --}}
+                    <legend>Sélectionne un ou plusieurs slots d'heure pour le jour sélectionné</legend>
 
-                            // Initially disable the submit button
-                            submitButton.disabled = true;
-                            submitButton.classList.add('cursor-not-allowed');
+                    @if (empty($hours))
+                        <p>No availability on this day.</p>
+                    @else
+                        <p>Durée d'un service: 1 heure.</p>
+                        @foreach ($hours as $hour)
+                            <div class="inline-block hour">
+                                <input type="checkbox" id="{{ $date }}-{{ $hour }}" name="hours[]"
+                                    value="{{ $date }}-{{ $hour }}"
+                                    class="hidden hourCheckbox text-lime-500 focus:ring-lime-600 peer ">
+                                <label for="{{ $date }}-{{ $hour }}"
+                                    class="inline-flex items-center justify-between w-full p-2 rounded-full cursor-pointer text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">{{ $hour }}</label>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            @endforeach
 
-                            // Function to check if at least one hour checkbox is checked
-                            function checkHourCheckboxes() {
-                                var isChecked = Array.from(hourCheckboxes).some(function(checkbox) {
-                                    return checkbox.checked;
-                                });
-
-                                // Enable or disable the submit button based on whether a checkbox is checked
-                                submitButton.disabled = !isChecked;
-                                if (isChecked) {
-                                    submitButton.classList.remove('cursor-not-allowed');
-                                    submitButton.classList.add('cursor-pointer');
-                                } else {
-                                    submitButton.classList.add('cursor-not-allowed');
-                                    submitButton.classList.remove('cursor-pointer');
-                                }
-                            }
-
-                            // Add a change event listener to each radio button
-                            radios.forEach(function(radio) {
-                                radio.addEventListener('change', function() {
-                                    // Hide all the day divs
-                                    document.querySelectorAll('.day').forEach(function(dayDiv) {
-                                        dayDiv.style.display = 'none';
-                                    });
-
-                                    // Show the selected day div
-                                    var selectedDayDiv = document.querySelector('.day[id="' + this.value + '"]');
-                                    if (selectedDayDiv) {
-                                        selectedDayDiv.style.display = 'block';
-                                    }
-
-                                    // Check the hour checkboxes whenever a date is selected
-                                    checkHourCheckboxes();
-                                });
-                            });
-
-                            // Add a change event listener to each hour checkbox
-                            hourCheckboxes.forEach(function(checkbox) {
-                                checkbox.addEventListener('change', checkHourCheckboxes);
-                            });
-                        </script>
-                    </section>
-                    <section class='p-6 bg-neutral-800 sm:rounded-xl'>
-                        <x-section-title class="text-2xl font-semibold leading-tight uppercase text-lime-500">A
-                            propos</x-section-title>
-                        <div>{{ $coach->bio }}</div>
-                    </section>
-                    <section class="p-6 bg-neutral-800 sm:rounded-xl">
-                        <x-section-title
-                            class="text-2xl font-semibold leading-tight uppercase text-lime-500">Avis</x-section-title>
-                        <ul class="space-y-4">
-                            @foreach ($coach->reviews as $review)
-                                <li class="text-white bg-neutral-800">
-                                    <div>{{ $review->text }}</div>
-                                    <div class="text-sm">par <span class="italic">{{ $review->client_name }}</span>
-                                        le
-                                        {{ $review->created_at->format('d-m-Y') }}
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </section>
-                </section>
+            <div class="flex justify-center">
+                <x-primary-button type="submit" id="submitButton" disabled
+                    class="mt-2 cursor-not-allowed">Réserver</x-primary-button>
             </div>
+            </form>
+
+
+            <script>
+                // Get all the radio buttons and hour checkboxes
+                var radios = document.querySelectorAll('input[type=radio][name="date"]');
+                var hourCheckboxes = document.querySelectorAll('.hourCheckbox');
+                var submitButton = document.getElementById('submitButton');
+
+                // Initially disable the submit button
+                submitButton.disabled = true;
+                submitButton.classList.add('cursor-not-allowed');
+
+                // Function to check if at least one hour checkbox is checked
+                function checkHourCheckboxes() {
+                    var isChecked = Array.from(hourCheckboxes).some(function(checkbox) {
+                        return checkbox.checked;
+                    });
+
+                    // Enable or disable the submit button based on whether a checkbox is checked
+                    submitButton.disabled = !isChecked;
+                    if (isChecked) {
+                        submitButton.classList.remove('cursor-not-allowed');
+                        submitButton.classList.add('cursor-pointer');
+                    } else {
+                        submitButton.classList.add('cursor-not-allowed');
+                        submitButton.classList.remove('cursor-pointer');
+                    }
+                }
+
+                // Add a change event listener to each radio button
+                radios.forEach(function(radio) {
+                    radio.addEventListener('change', function() {
+                        // Hide all the day divs
+                        document.querySelectorAll('.day').forEach(function(dayDiv) {
+                            dayDiv.style.display = 'none';
+                        });
+
+                        // Show the selected day div
+                        var selectedDayDiv = document.querySelector('.day[id="' + this.value + '"]');
+                        if (selectedDayDiv) {
+                            selectedDayDiv.style.display = 'block';
+                        }
+
+                        // Check the hour checkboxes whenever a date is selected
+                        checkHourCheckboxes();
+                    });
+                });
+
+                // Add a change event listener to each hour checkbox
+                hourCheckboxes.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', checkHourCheckboxes);
+                });
+            </script>
+            </section>
+            <section class='p-6 bg-neutral-800 sm:rounded-xl'>
+                <x-section-title class="text-2xl font-semibold leading-tight uppercase text-lime-500">A
+                    propos</x-section-title>
+                <div>{{ $coach->bio }}</div>
+            </section>
+            <section class="p-6 bg-neutral-800 sm:rounded-xl">
+                <x-section-title
+                    class="text-2xl font-semibold leading-tight uppercase text-lime-500">Avis</x-section-title>
+                <ul class="space-y-4">
+                    @foreach ($coach->reviews as $review)
+                        <li class="text-white bg-neutral-800">
+                            <div>{{ $review->text }}</div>
+                            <div class="text-sm">par <span class="italic">{{ $review->client_name }}</span>
+                                le
+                                {{ $review->created_at->format('d-m-Y') }}
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+            </section>
         </div>
+    </div>
     </div>
 </x-guest-layout>
