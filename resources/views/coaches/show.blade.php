@@ -125,7 +125,7 @@
             </ul>
 
             @foreach ($availabilities as $date => $hours)
-                <div class="day" id="{{ $date }}" style="display: none;">
+                <div class="mt-6 day" id="{{ $date }}" style="display: none;">
                     {{-- <h4>{{ __('days.' . $day) }}</h4> --}}
                     <legend>Sélectionne un ou plusieurs slots d'heure pour le jour sélectionné</legend>
 
