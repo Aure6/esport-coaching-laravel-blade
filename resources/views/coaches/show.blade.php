@@ -32,7 +32,7 @@
                         <div>Français</div>
                     </section>
                 </section>
-                <section class="gap-4 space-y-8 text-lg text-white md:col-span-2 ">
+                <section class="gap-4 space-y-6 text-lg text-white md:col-span-2 ">
                     <section class="p-6 bg-neutral-800 sm:rounded-xl">
                         <x-section-title
                             class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</x-section-title>
@@ -50,6 +50,7 @@
 
                             <div class="space-y-1 date-picker">
                                 <label for="date">Sélectionne une date</label>
+
                                 <ul>
                                     @php
                                         $weekNumber = 0;
