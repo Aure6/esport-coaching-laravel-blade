@@ -63,7 +63,7 @@
                                             @if ($weekNumber !== 0)
                             </div> <!-- Close the previous week div -->
                             @endif
-                            <div class="flex justify-around row"> <!-- Open a new week div -->
+                            <div class="flex flex-col sm:flex-row sm:justify-around"> <!-- Open a new week div -->
                                 @php
                                     $weekNumber = $currentWeekNumber;
                                 @endphp
@@ -72,10 +72,11 @@
                                     <input type="radio" id="{{ $date }}" name="date"
                                         value="{{ $date }}" class="hidden peer" required />
                                     <label for="{{ $date }}"
-                                        class="inline-flex items-center justify-between w-full p-2 text-gray-400 bg-gray-800 border border-gray-700 cursor-pointer peer-checked:text-lime-300 peer-checked:bg-gray-700 peer-checked:border-lime-500 hover:text-gray-300 hover:bg-gray-700">
-                                        <div class="block">
+                                        class="inline-flex items-center justify-between w-full p-2 rounded-full cursor-pointer text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
+                                        <div class="block mx-auto">
                                             {{-- <div class="w-full text-lg font-semibold">{{ $date }}</div> --}}
-                                            <div class="w-full">{{ __('days.' . $dayName) }} {{ $displayedDate }}</div>
+                                            <div class="w-full">{{ substr(__('days.' . $dayName), 0, 3) }}
+                                                {{ $displayedDate }}</div>
                                         </div>
                                     </label>
                                 </li>
@@ -102,7 +103,7 @@
                                                     name="hours[]" value="{{ $date }}-{{ $hour }}"
                                                     class="hidden hourCheckbox text-lime-500 focus:ring-lime-600 peer ">
                                                 <label for="{{ $date }}-{{ $hour }}"
-                                                    class="inline-flex items-center justify-between w-full p-2 text-gray-400 bg-gray-800 border-2 border-gray-700 rounded-lg cursor-pointer peer-checked:text-lime-300 hover:text-gray-300 peer-checked:border-lime-500 peer-checked:bg-gray-700 hover:bg-gray-700">{{ $hour }}</label>
+                                                    class="inline-flex items-center justify-between w-full p-2 rounded-full cursor-pointer text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">{{ $hour }}</label>
                                             </div>
                                         @endforeach
                                     @endif

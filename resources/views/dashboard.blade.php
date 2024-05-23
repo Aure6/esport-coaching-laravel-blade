@@ -185,7 +185,8 @@
                                 </div>
                                 <label for="{{ strtolower($day) }}_start">De</label>
                                 <select id="{{ strtolower($day) }}_start" name="{{ strtolower($day) }}_start"
-                                    x-bind:disabled="!available" class="text-neutral-800">
+                                    x-bind:disabled="!available"
+                                    class="text-sm text-white rounded-lg placeholder-neutral-400 bg-neutral-700 border-neutral-600 focus:ring-blue-500 focus:border-blue-500">
                                     @for ($i = 0; $i < 24; $i++)
                                         <option value="{{ sprintf('%02d', $i) }}:00"
                                             {{ ($availability && substr($availability->start_time, 0, 2) == sprintf('%02d', $i)) || (!$availability && $i == 9) ? 'selected' : '' }}>
@@ -195,7 +196,8 @@
                                 {{-- <span>-></span> --}}
                                 <label for="{{ strtolower($day) }}_end">à</label>
                                 <select id="{{ strtolower($day) }}_end" name="{{ strtolower($day) }}_end"
-                                    x-bind:disabled="!available" class="text-neutral-800">
+                                    x-bind:disabled="!available"
+                                    class="text-sm text-white rounded-lg placeholder-neutral-400 bg-neutral-700 border-neutral-600 focus:ring-blue-500 focus:border-blue-500">
                                     @for ($i = 0; $i < 24; $i++)
                                         <option value="{{ sprintf('%02d', $i) }}:00"
                                             {{ ($availability && substr($availability->end_time, 0, 2) == sprintf('%02d', $i)) || (!$availability && $i == 12) ? 'selected' : '' }}>
