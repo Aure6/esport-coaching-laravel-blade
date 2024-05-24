@@ -50,10 +50,11 @@ class AppointmentController extends Controller
             } else {
                 // Handle the case where the hour is not in the correct format
                 // This could be returning an error message, throwing an exception, etc.
+                dd();
             }
         }
 
-        return redirect()->route('back')->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
+        return redirect()->back()->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
         // return redirect()->route('dashboard')->with('success', 'Appointment has been created successfully.');
     }
 
