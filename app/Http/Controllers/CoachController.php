@@ -26,7 +26,7 @@ class CoachController extends Controller
         $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
         // the for loop calculates dates for the 8 next weeks
-        for ($i = 0; $i < 8 * 7; $i++) {
+        for ($i = 0; $i < 12 * 7; $i++) {
             $date = Carbon::now()->addDays($i);
             $dayOfWeek = $date->format('l');
 

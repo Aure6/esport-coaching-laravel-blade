@@ -33,7 +33,7 @@ class AppointmentController extends Controller
 
         $user = Auth::user();
 
-        /*
+
         // Check if the selected date and hours are still available
         foreach ($validatedData['hours'] as $hour) {
             list($day, $time) = explode('-', $hour);
@@ -57,12 +57,13 @@ class AppointmentController extends Controller
                 return back()->withErrors(["La date et le temps sélectionnés viennent d'être réservés entre-temps. Veuillez effectuer un choix à nouveau."]);
             }
         }
- */
+
 
         // Check if the selected date and start time already exist in the appointments table
-        $existingAppointment = Appointment::where('date', $validatedData['date'])
-            ->where('start', $validatedData['start'])
-            ->first();
+        // $existingAppointment = Appointment::where('date', $validatedData['date'])
+        //     ->where('start', $validatedData['start'])
+        //     ->where('coach_id', $validatedData['coach_id'])
+        //     ->first();
 
         if ($existingAppointment) {
             return back()->withErrors(["La date et le temps sélectionnés viennent d'être réservés entre-temps. Veuillez effectuer un choix à nouveau."]);
@@ -77,8 +78,8 @@ class AppointmentController extends Controller
         // Remove the form data from the session
         $request->session()->forget('form_data');
 
-        return redirect()->route('dashboard.index')->with('success', 'Le rendez-vous a été pris avec succès.');
-        // return redirect()->route('appointments.index')->with('success', 'Appointment has been created successfully.');
+        return redirect()->route('back')->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
+        // return redirect()->route('dashboard')->with('success', 'Appointment has been created successfully.');
     }
 
     public function destroy($id)

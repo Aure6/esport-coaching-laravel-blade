@@ -21,7 +21,7 @@ Route::get('/games/show/{id}', [GameController::class, 'show'])->name('games.sho
 
 Route::get('/coaches/show/{id}', [CoachController::class, 'show'])->name('coaches.show');
 
-Route::post('/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::post('/{coach_id}/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

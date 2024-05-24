@@ -33,7 +33,7 @@ class AppointmentSeeder extends Seeder
         $date = Carbon::now()->next(Carbon::MONDAY);
 
         // Loop for the next 8 weeks
-        for ($week = 0; $week < 8; $week++) {
+        for ($week = 0; $week < 12; $week++) {
             foreach ($coaches as $coach_id) {
                 $availabilities = DB::table('availabilities')->where('coach_id', $coach_id)->get();
 

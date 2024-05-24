@@ -45,11 +45,15 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('appointments.store') }}" class="">
+                        <form method="POST" action="{{ route('appointments.store', ['coach_id' => $coach->id]) }}"
+                            class="">
                             @csrf
 
                             <div class="space-y-1 date-picker">
-                                <label for="date">Sélectionne une date</label>
+                                @if (!empty($availabilities))
+                                    <label for="date">Sélectionne une date</label>
+                                @endif
+
 
                                 <ul>
                                     @php
