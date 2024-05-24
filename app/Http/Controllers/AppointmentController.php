@@ -53,53 +53,6 @@ class AppointmentController extends Controller
             }
         }
 
-
-
-
-        // Check if the selected date and hours are still available
-        foreach ($validatedData['hours'] as $hour) {
-            list($day, $time) = explode('-', $hour);
-            $availability = Availability::where('day_of_week', $day)
-                ->whereTime('start_time', '<=', $time)
-                ->whereTime('end_time', '>=', $time)
-                ->first();
-
-            if (!$availability) {
-                // return back()->withErrors(['The selected date and time are no longer available.']);
-                return back()->withErrors(['La date et le temps sélectionnés ne sont plus disponibles. Veuillez effectuer un choix à nouveau.']);
-            }
-
-            // Check if the selected date and hours already exist in the appointments table
-            $existingAppointment = Appointment::where('date', $validatedData['date'])
-                ->where('hours', 'like', '%' . $hour . '%')
-                ->first();
-
-            if ($existingAppointment) {
-                // return back()->withErrors(['The selected date and time are already booked.']);
-                return back()->withErrors(["La date et le temps sélectionnés viennent d'être réservés entre-temps. Veuillez effectuer un choix à nouveau."]);
-            }
-        }
-
-
-        // Check if the selected date and start time already exist in the appointments table
-        // $existingAppointment = Appointment::where('date', $validatedData['date'])
-        //     ->where('start', $validatedData['start'])
-        //     ->where('coach_id', $validatedData['coach_id'])
-        //     ->first();
-
-        if ($existingAppointment) {
-            return back()->withErrors(["La date et le temps sélectionnés viennent d'être réservés entre-temps. Veuillez effectuer un choix à nouveau."]);
-        }
-
-        $appointment = new Appointment;
-        $appointment->date = $validatedData['date'];
-        $appointment->start = $validatedData['start']; // Change 'hours' to 'start'
-        $appointment->user_id = $user->id;
-        $appointment->save();
-
-        // Remove the form data from the session
-        $request->session()->forget('form_data');
-
         return redirect()->route('back')->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
         // return redirect()->route('dashboard')->with('success', 'Appointment has been created successfully.');
     }
