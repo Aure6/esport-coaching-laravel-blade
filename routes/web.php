@@ -21,8 +21,6 @@ Route::get('/games/show/{id}', [GameController::class, 'show'])->name('games.sho
 
 Route::get('/coaches/show/{id}', [CoachController::class, 'show'])->name('coaches.show');
 
-Route::post('/{coach_id}/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -30,6 +28,7 @@ Route::middleware('auth')->group(function () {
     // Route::post('/availabilities', 'AvailabilityController@update')->name('availabilities.update');
     Route::post('/availabilities.update', [AvailabilityController::class, 'update'])->name('availabilities.update');
 
+    Route::post('/{coach_id}/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store');
     Route::delete('/appointments/destroy/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
     Route::post('/user/updateRole', [DashboardController::class, 'updateRole'])->name('user.updateRole');
