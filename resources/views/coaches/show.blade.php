@@ -158,22 +158,18 @@
 
 
             <script>
-                // Get all the radio buttons and hour checkboxes
-                var radios = document.querySelectorAll('input[type=radio][name="date"]');
-                var hourCheckboxes = document.querySelectorAll('.hourCheckbox');
-                var submitButton = document.getElementById('submitButton');
+                const radios = document.querySelectorAll('input[type=radio][name="date"]');
+                const hourCheckboxes = document.querySelectorAll('.hourCheckbox');
+                const submitButton = document.getElementById('submitButton');
 
-                // Initially disable the submit button
                 submitButton.disabled = true;
                 submitButton.classList.add('cursor-not-allowed');
 
-                // Function to check if at least one hour checkbox is checked
                 function checkHourCheckboxes() {
                     var isChecked = Array.from(hourCheckboxes).some(function(checkbox) {
                         return checkbox.checked;
                     });
 
-                    // Enable or disable the submit button based on whether a checkbox is checked
                     submitButton.disabled = !isChecked;
                     if (isChecked) {
                         submitButton.classList.remove('cursor-not-allowed');
@@ -184,26 +180,25 @@
                     }
                 }
 
-                // Add a change event listener to each radio button
                 radios.forEach(function(radio) {
                     radio.addEventListener('change', function() {
-                        // Hide all the day divs
+                        hourCheckboxes.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+
                         document.querySelectorAll('.day').forEach(function(dayDiv) {
                             dayDiv.style.display = 'none';
                         });
 
-                        // Show the selected day div
                         var selectedDayDiv = document.querySelector('.day[id="' + this.value + '"]');
                         if (selectedDayDiv) {
                             selectedDayDiv.style.display = 'block';
                         }
 
-                        // Check the hour checkboxes whenever a date is selected
                         checkHourCheckboxes();
                     });
                 });
 
-                // Add a change event listener to each hour checkbox
                 hourCheckboxes.forEach(function(checkbox) {
                     checkbox.addEventListener('change', checkHourCheckboxes);
                 });

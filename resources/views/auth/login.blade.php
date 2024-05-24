@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="w-full px-6 py-4 mx-auto mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
+    <div class="w-full px-6 py-4 mx-auto mt-6 overflow-hidden shadow-md bg-neutral-700 sm:max-w-md sm:rounded-lg">
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -28,14 +28,14 @@
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox"
-                        class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500" name="remember">
-                    <span class="text-sm text-gray-600 ms-2">{{ __('Remember me') }}</span>
+                        class="border-gray-300 rounded shadow-sm text-lime-600 focus:ring-lime-500" name="remember">
+                    <span class="text-sm text-gray-300 ms-2">{{ __('Remember me') }}</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    <a class="text-sm text-gray-300 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500"
                         href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>

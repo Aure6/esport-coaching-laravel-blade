@@ -14,6 +14,8 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->session()->put('form_data', $request->all());
+
         // Check if the user is logged in
         if (!Auth::check()) {
             // Store the form data in the session
@@ -25,14 +27,15 @@ class AppointmentController extends Controller
 
         // Retrieve the form data from the session if it exists
         $form_data = $request->session()->get('form_data', $request->all());
+        dd($form_data);
 
         $validatedData = $request->validate([
             'date' => 'required|date',
-            'start' => 'required|string', // Change 'hours' to 'start'
+            'hours' => 'required|array',
+            'hours.*' => 'required|string',
         ]);
 
         $user = Auth::user();
-
 
         // Check if the selected date and hours are still available
         foreach ($validatedData['hours'] as $hour) {
