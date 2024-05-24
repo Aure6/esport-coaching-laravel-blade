@@ -152,7 +152,7 @@
 
             <div class="flex justify-center">
                 <x-primary-button type="submit" id="submitButton" disabled
-                    class="mt-2 cursor-not-allowed">Réserver</x-primary-button>
+                    class="mt-2 cursor-not-allowed bg-lime-200">Réserver</x-primary-button>
             </div>
             </form>
 
@@ -172,10 +172,10 @@
 
                     submitButton.disabled = !isChecked;
                     if (isChecked) {
-                        submitButton.classList.remove('cursor-not-allowed');
+                        submitButton.classList.remove('cursor-not-allowed', 'bg-lime-200');
                         submitButton.classList.add('cursor-pointer');
                     } else {
-                        submitButton.classList.add('cursor-not-allowed');
+                        submitButton.classList.add('cursor-not-allowed', 'bg-lime-200');
                         submitButton.classList.remove('cursor-pointer');
                     }
                 }
