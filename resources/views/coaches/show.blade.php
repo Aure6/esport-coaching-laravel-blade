@@ -6,7 +6,12 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+            @if (session('success'))
+                <div class="p-6 mx-auto overflow-hidden text-white bg-green-500 sm:rounded-xl">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="grid grid-cols-1 gap-6 overflow-hidden md:grid-cols-3">
                 <section
                     class="gap-4 p-6 space-y-8 text-lg text-white uppercase sm:rounded-xl md:col-span-1 bg-neutral-800 h-fit">
