@@ -37,13 +37,18 @@
                         <x-section-title
                             class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</x-section-title>
                         @if ($errors->any())
-                            <div class="bg-red-500">
+                            <div class="p-2 text-white bg-red-500 rounded-xl">
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
+                        @endif
+                        @if (!Auth::check())
+                            <div class="p-2 text-white bg-orange-500 rounded-xl">Vous devez être connecter afin
+                                d'effectuer une
+                                réservation.</div>
                         @endif
                         <form method="POST" action="{{ route('appointments.store', ['coach_id' => $coach->id]) }}"
                             class="">

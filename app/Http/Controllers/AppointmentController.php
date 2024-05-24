@@ -14,29 +14,47 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        /* $request->session()->put('form_data', $request->all());
-
-        // Check if the user is logged in
-        if (!Auth::check()) {
-            // Store the form data in the session
-            $request->session()->put('form_data', $request->all());
-
-            // Redirect to the login page
-            return redirect()->route('login');
-        }
-
-        // Retrieve the form data from the session if it exists
-        $form_data = $request->session()->get('form_data', $request->all());
-        dd($form_data); */
-
-        dd($request);
+        // dd($request);
         $validatedData = $request->validate([
             'date' => 'required|date',
             'hours' => 'required|array',
             'hours.*' => 'required|string',
         ]);
 
-        $user = Auth::user();
+        // Extract the date and hours from the request
+        $date = $request->input('date');
+        $hours = $request->input('hours');
+
+        // Get the coach_id from the route parameters
+        $coach_id = $request->route('coach_id');
+
+        // Get the client_id from the authenticated user
+        $client_id = auth()->id();
+
+        foreach ($hours as $hour) {
+            // Extract the date and hour using substr
+            $date = substr($hour, 0, 10); // Get the first 10 characters for the date
+            $hour = substr($hour, 11); // Get the rest of the string for the hour
+
+            // Check if the hour is in the correct format
+            if (preg_match("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", $hour)) {
+                // Create a new appointment
+                $appointment = new Appointment();
+                $appointment->client_id = $client_id;
+                $appointment->coach_id = $coach_id;
+                $appointment->date = $date;
+                $appointment->start = $hour;
+
+                // Save the appointment
+                $appointment->save();
+            } else {
+                // Handle the case where the hour is not in the correct format
+                // This could be returning an error message, throwing an exception, etc.
+            }
+        }
+
+
+
 
         // Check if the selected date and hours are still available
         foreach ($validatedData['hours'] as $hour) {
