@@ -8,7 +8,7 @@
     <div class="py-12">
         <div x-data="{ tab: localStorage.getItem('tab') || 'tab1' }" x-init="$watch('tab', val => localStorage.setItem('tab', val))" class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
             @if (session('success'))
-                <div class="p-6 mx-auto overflow-hidden text-white bg-green-500 sm:rounded-lg">
+                <div class="p-6 mx-auto overflow-hidden text-white bg-green-500 sm:rounded-xl">
                     {{ session('success') }}
                 </div>
             @endif

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Availability;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
+        $now = Carbon::now();
         $appointments = Appointment::where('client_id', $user->id)
             ->orWhere('coach_id', $user->id)
+            ->where('date', '>=', $now)
+            ->orderBy('date', 'asc')
             ->get();
 
         if ($user->role->name === "Coach") {
