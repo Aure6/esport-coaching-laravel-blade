@@ -30,6 +30,10 @@
                 </div>
                 @if (Route::has('login'))
                     <div class="flex justify-end flex-1 -mx-3">
+                        <a href="{{ url('/games') }}"
+                            class="inline-flex items-center py-2.5 px-5 bg-lime-500 border border-transparent rounded-md font-semibold text-black hover:text-white uppercase tracking-wider hover:bg-lime-700 focus:bg-lime-700 active:bg-lime-900 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            {{ __('Réserve ta session') }}
+                        </a>
                         @auth
                             <a href="{{ url('/dashboard') }}"
                                 class="rounded-md px-6 py-4 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
