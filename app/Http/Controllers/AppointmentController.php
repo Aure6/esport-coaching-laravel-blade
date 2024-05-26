@@ -6,6 +6,8 @@ use App\Models\Appointment;
 use App\Models\Availability;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -14,15 +16,13 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // Validate the incoming request
         $validatedData = $request->validate([
-            'date' => 'required|date',
             'hours' => 'required|array',
             'hours.*' => 'required|string',
         ]);
 
-        // Extract the date and hours from the request
-        $date = $request->input('date');
+        // Extract the hours array from the request
         $hours = $request->input('hours');
 
         // Get the coach_id from the route parameters
@@ -31,32 +31,71 @@ class AppointmentController extends Controller
         // Get the client_id from the authenticated user
         $client_id = auth()->id();
 
-        foreach ($hours as $hour) {
-            // Extract the date and hour using substr
-            $date = substr($hour, 0, 10); // Get the first 10 characters for the date
-            $hour = substr($hour, 11); // Get the rest of the string for the hour
+        // Start a transaction
+        DB::beginTransaction();
 
-            // Check if the hour is in the correct format
-            if (preg_match("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", $hour)) {
+        try {
+            foreach ($hours as $hourEntry) {
+                // Extract the date and hour from the hourEntry
+                $date = substr($hourEntry, 0, 10); // Get the first 10 characters for the date
+                $hour = substr($hourEntry, 11); // Get the rest of the string for the hour
+
+                // Validate the hour format
+                if (!preg_match("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/", $hour)) {
+                    DB::rollBack();
+                    return redirect()->back()->withErrors('L\'heure fournie n\'est pas dans le format correct.');
+                }
+
+                // Get the day of the week from the date
+                $dayOfWeek = Carbon::parse($date)->format('l');
+
+                // Check if the coach is available at the given date and hour
+                $availability = DB::table('availabilities')
+                    ->where('coach_id', $coach_id)
+                    ->where('day_of_week', $dayOfWeek)
+                    ->where('start_time', '<=', $hour)
+                    ->where('end_time', '>', $hour)
+                    ->exists();
+
+                if (!$availability) {
+                    DB::rollBack();
+                    return redirect()->back()->withErrors('Le coach n\'est pas disponible à cette heure.');
+                }
+
+                // Check if there is already an appointment at the given date and hour
+                $existingAppointment = DB::table('appointments')
+                    ->where('coach_id', $coach_id)
+                    ->where('start', $hour . ':00') // Ensure matching format with the seeder
+                    ->whereDate('date', $date)
+                    ->exists();
+
+                if ($existingAppointment) {
+                    DB::rollBack();
+                    return redirect()->back()->withErrors('Le coach a déjà un rendez-vous à cette heure.');
+                }
+
                 // Create a new appointment
                 $appointment = new Appointment();
                 $appointment->client_id = $client_id;
                 $appointment->coach_id = $coach_id;
                 $appointment->date = $date;
-                $appointment->start = $hour;
+                $appointment->start = $hour . ':00'; // Ensure matching format with the seeder
 
                 // Save the appointment
                 $appointment->save();
-            } else {
-                // Handle the case where the hour is not in the correct format
-                // This could be returning an error message, throwing an exception, etc.
-                dd();
             }
-        }
 
-        return redirect()->back()->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
-        // return redirect()->route('dashboard')->with('success', 'Appointment has been created successfully.');
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
+        } catch (\Exception $e) {
+            // Roll back the transaction in case of an error
+            DB::rollBack();
+            return redirect()->back()->withErrors('Une erreur est survenue lors de la prise de rendez-vous.');
+        }
     }
+
 
     public function destroy($id)
     {

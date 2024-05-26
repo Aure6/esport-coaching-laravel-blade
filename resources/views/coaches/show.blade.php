@@ -12,6 +12,15 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if ($errors->any())
+                <div class="p-6 mx-auto overflow-hidden text-white bg-red-500 sm:rounded-xl">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="grid grid-cols-1 gap-6 overflow-hidden md:grid-cols-3">
                 <section
                     class="gap-4 p-6 space-y-8 text-lg text-white uppercase sm:rounded-xl md:col-span-1 bg-neutral-800 h-fit">
@@ -41,15 +50,6 @@
                     <section class="p-6 bg-neutral-800 sm:rounded-xl">
                         <x-section-title
                             class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</x-section-title>
-                        @if ($errors->any())
-                            <div class="p-2 text-white bg-red-500 rounded-xl">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         @if (!Auth::check())
                             <div class="p-2 text-white bg-orange-500 rounded-xl">Vous devez être connecter afin
                                 d'effectuer une
