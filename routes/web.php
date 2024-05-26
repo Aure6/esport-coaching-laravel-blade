@@ -16,6 +16,10 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/legal-notice', function () {
+    return view('legal-notice');
+})->name('legal.notice');
+
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/show/{id}', [GameController::class, 'show'])->name('games.show');
 

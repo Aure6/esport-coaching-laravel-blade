@@ -109,10 +109,7 @@
         </main>
     </div>
 
-    <footer class="py-16 text-sm text-center bg-black">
-        <a href="">Mentions légales</a>
-        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-    </footer>
+    @include('layouts.footer')
 </body>
 
 </html>

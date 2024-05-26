@@ -1,9 +1,9 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
+    <x-slot name="header">
         <h1>
             {{ __('Dashboard') }}
         </h1>
-    </x-slot> --}}
+    </x-slot>
 
     <div class="py-12">
         <div x-data="{ tab: localStorage.getItem('tab') || 'tab1' }" x-init="$watch('tab', val => localStorage.setItem('tab', val))" class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
@@ -12,7 +12,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="flex p-2 text-sm font-medium text-center text-gray-400 rounded-lg bg-neutral-800">
+            <div class="flex p-2 text-sm font-medium text-center text-gray-400 sm:rounded-xl bg-neutral-800">
                 <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab1' }"
                     class="inline-block p-4 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
                     @click="tab = 'tab1'">Rendez-vous</button>
@@ -162,7 +162,7 @@
 
             @if (Auth::user()->role->name == 'Coach')
                 <div x-show="tab === 'tab2'"
-                    class="flex flex-col items-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm sm:w-fit bg-neutral-800 sm:rounded-lg">
+                    class="flex flex-col items-center justify-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm sm:w-fit bg-neutral-800 sm:rounded-lg">
                     <x-section-title class="self-start">Disponibilités</x-section-title>
                     <div class="self-start">
                         Un service dure une heure.
@@ -174,7 +174,7 @@
                                 $availability = $availabilities->firstWhere('day_of_week', $day);
                             @endphp
                             <div x-data="{ available: {{ $availability ? 'true' : 'false' }} }"
-                                class="p-2 my-2 rounded-lg bg-neutral-700 availability-day w-fit">
+                                class="p-2 mx-auto my-2 rounded-lg bg-neutral-700 availability-day w-fit">
                                 <div>
                                     <input x-bind:checked="available" x-on:click="available = !available"
                                         type="checkbox" id="{{ strtolower($day) }}_checkbox"

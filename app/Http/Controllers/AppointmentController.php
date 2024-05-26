@@ -16,22 +16,17 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request
         $validatedData = $request->validate([
             'hours' => 'required|array',
             'hours.*' => 'required|string',
         ]);
 
-        // Extract the hours array from the request
         $hours = $request->input('hours');
 
-        // Get the coach_id from the route parameters
         $coach_id = $request->route('coach_id');
 
-        // Get the client_id from the authenticated user
         $client_id = auth()->id();
 
-        // Start a transaction
         DB::beginTransaction();
 
         try {
@@ -74,23 +69,19 @@ class AppointmentController extends Controller
                     return redirect()->back()->withErrors('Le coach a déjà un rendez-vous à cette heure.');
                 }
 
-                // Create a new appointment
                 $appointment = new Appointment();
                 $appointment->client_id = $client_id;
                 $appointment->coach_id = $coach_id;
                 $appointment->date = $date;
                 $appointment->start = $hour . ':00'; // Ensure matching format with the seeder
 
-                // Save the appointment
                 $appointment->save();
             }
 
-            // Commit the transaction
             DB::commit();
 
             return redirect()->back()->with('success', 'Le rendez-vous a été pris avec succès. Vous pouvez voir vos rendez-vous sur votre tableau de bord.');
         } catch (\Exception $e) {
-            // Roll back the transaction in case of an error
             DB::rollBack();
             return redirect()->back()->withErrors('Une erreur est survenue lors de la prise de rendez-vous.');
         }
