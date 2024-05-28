@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="max-w-2xl mx-auto space-x-4">
+            <div class="max-w-2xl mx-auto">
                 <p><strong>Droit d'auteur<br></strong>Le site <a href="/ecole/../">www.aurelienschmit.be</a> constitue
                     une création protégée par le droit d'auteur. Les éléments de mon site sont protégés par le droit
                     d'auteur. Toute copie, adaptation, traduction,

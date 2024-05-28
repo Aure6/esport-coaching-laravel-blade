@@ -2,13 +2,15 @@
     <!-- Logo -->
     <div class="flex items-center shrink-0">
         <a href="{{ route('dashboard') }}">
-            <x-application-logo class="block w-auto h-16 duration-200 fill-current text-lime-500 hover:scale-105" />
+            <x-application-logo
+                class="block w-auto h-16 duration-200 fill-current text-lime-500 hover:scale-105 focus:ring-2 focus:ring-offset-2 focus:ring-lime-500" />
         </a>
     </div>
 
     <div>© 2024 JVCoaching. Tous droits réservés.</div>
 
-    <a href="{{ route('legal.notice') }}" class="hover:text-lime-500 focus:text-lime-300">
+    <a href="{{ route('legal.notice') }}"
+        class="hover:text-lime-500 focus:text-lime-300 focus:ring-2 focus:ring-offset-2 focus:ring-lime-500">
         Mentions légales
     </a>
 </footer>
