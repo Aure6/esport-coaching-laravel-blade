@@ -23,7 +23,7 @@
 
             <div class="flex items-center justify-end flex-1 -mx-3">
                 <a href="{{ route('games.index') }}"
-                    class="inline-flex items-center px-4 py-4 font-black tracking-wider text-black uppercase transition duration-150 ease-in-out border border-transparent rounded-md bg-lime-400 hover:text-white hover:bg-lime-700 focus:bg-lime-700 active:bg-lime-900 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
+                    class="inline-flex items-center px-5 py-2.5 font-black tracking-wider text-black uppercase transition duration-150 ease-in-out border border-transparent rounded-md bg-lime-400 hover:text-white hover:bg-lime-700 focus:bg-lime-700 active:bg-lime-900 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2">
                     {{ __('Réserve ta session') }}
                 </a>
             </div>
