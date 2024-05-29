@@ -34,7 +34,7 @@
 
             <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
-                <form method="POST" action="{{ route('user.updateRole') }}">
+                <form method="POST" action="{{ route('user.updateRole') }}" x-data="roleForm()">
                     @csrf
                     <div>Vous êtes <span class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span> mais
                         vous pouvez
@@ -46,7 +46,8 @@
                     </div>
                     <div class="">
                         <input type="radio" id="client" name="role_id" value="2" class="hidden peer" required
-                            {{ Auth::user()->role->name === 'Client' ? 'checked' : '' }} />
+                            {{ Auth::user()->role->name === 'Client' ? 'checked' : '' }}
+                            @click="selectedRole = 'Client'" />
                         <label for="client"
                             class="inline-flex items-center justify-between p-2 border rounded-full cursor-pointer border-neutral-700 text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
                             <div class="block">
@@ -57,7 +58,8 @@
 
                     <div class="">
                         <input type="radio" id="coach" name="role_id" value="1" class="hidden peer" required
-                            {{ Auth::user()->role->name === 'Coach' ? 'checked' : '' }} />
+                            {{ Auth::user()->role->name === 'Coach' ? 'checked' : '' }}
+                            @click="selectedRole = 'Coach'" />
                         <label for="coach"
                             class="inline-flex items-center justify-between p-2 border rounded-full cursor-pointer border-neutral-700 text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
                             <div class="block">
@@ -67,12 +69,23 @@
                     </div>
 
                     <div class="flex items-center justify-center mt-8">
-                        <x-primary-button type="submit">
+                        <x-primary-button type="submit" x-show="canSubmit">
                             {{-- {{ __('Update Role') }} --}}
                             {{ __('Mettre à jour le rôle') }}
                         </x-primary-button>
                     </div>
                 </form>
+                <script>
+                    function roleForm() {
+                        return {
+                            currentRole: '{{ Auth::user()->role->name }}',
+                            selectedRole: '{{ Auth::user()->role->name }}',
+                            get canSubmit() {
+                                return this.selectedRole !== this.currentRole;
+                            }
+                        }
+                    }
+                </script>
             </div>
 
             <div x-show="tab === 'tab1'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
