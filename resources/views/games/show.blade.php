@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="text-3xl font-semibold leading-tight text-gray-800 uppercase">
             {{ __('Trouve ton coach parfait pour une session en direct dans ') }}{{ $game->name }}
@@ -26,4 +26,4 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-app-layout>

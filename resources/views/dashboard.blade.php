@@ -45,28 +45,28 @@
                         avant votre changement de rôle.
                     </div>
                     <div class="">
-                        <input type="radio" id="client" name="role_id" value="2" class="hidden peer"
-                            required />
+                        <input type="radio" id="client" name="role_id" value="2" class="hidden peer" required
+                            {{ Auth::user()->role->name === 'Client' ? 'checked' : '' }} />
                         <label for="client"
-                            class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 dark:peer-checked:bg-gray-700 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="inline-flex items-center justify-between p-2 border rounded-full cursor-pointer border-neutral-700 text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
                             <div class="block">
                                 <div class="w-full">{{ __('Client') }}</div>
                             </div>
                         </label>
                     </div>
 
-                    <div class="mb-4">
-                        <input type="radio" id="coach" name="role_id" value="1" class="hidden peer"
-                            required />
+                    <div class="">
+                        <input type="radio" id="coach" name="role_id" value="1" class="hidden peer" required
+                            {{ Auth::user()->role->name === 'Coach' ? 'checked' : '' }} />
                         <label for="coach"
-                            class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 dark:peer-checked:bg-gray-700 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="inline-flex items-center justify-between p-2 border rounded-full cursor-pointer border-neutral-700 text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
                             <div class="block">
                                 <div class="w-full">{{ __('Coach') }}</div>
                             </div>
                         </label>
                     </div>
 
-                    <div class="flex items-center justify-center mt-4">
+                    <div class="flex items-center justify-center mt-8">
                         <x-primary-button type="submit">
                             {{-- {{ __('Update Role') }} --}}
                             {{ __('Mettre à jour le rôle') }}
