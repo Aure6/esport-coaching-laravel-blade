@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'rounded-full overflow-hidden h-full']) }}>
+<div {{ $attributes->merge(['class' => 'rounded-full overflow-hidden h-fit']) }}>
     @if ($user->avatar_path)
         <img class="object-cover object-center aspect-square" src="{{ asset('storage/' . $user->avatar_path) }}"
             alt="{{ $user->name }}" />

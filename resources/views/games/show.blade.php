@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 gap-6 overflow-hidden md:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6 overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
                 {{-- <Link :href="route('games.show', { gameId: game.id, })" v-for="game in  games" :key="game.id"
                         class="block p-6 text-2xl text-white uppercase duration-200 bg-neutral-700 hover:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
                     {{ game.name }}

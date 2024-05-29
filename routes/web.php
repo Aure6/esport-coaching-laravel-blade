@@ -6,11 +6,12 @@ use App\Http\Controllers\CoachController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -20,6 +21,7 @@ Route::get('/legal-notice', function () {
     return view('legal-notice');
 })->name('legal.notice');
 
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/show/{id}', [GameController::class, 'show'])->name('games.show');
 
