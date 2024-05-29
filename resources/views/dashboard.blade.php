@@ -34,7 +34,7 @@
 
             <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
-                <form method="POST" action="{{ route('user.updateRole') }}" x-data="roleForm()">
+                <form method="POST" action="{{ route('user.updateRole') }}">
                     @csrf
                     <div>Vous êtes <span class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span> mais
                         vous pouvez
@@ -46,8 +46,7 @@
                     </div>
                     <div class="">
                         <input type="radio" id="client" name="role_id" value="2" class="hidden peer" required
-                            {{ Auth::user()->role->name === 'Client' ? 'checked' : '' }}
-                            @click="selectedRole = 'Client'" />
+                            {{ Auth::user()->role->name === 'Client' ? 'checked' : '' }} />
                         <label for="client"
                             class="inline-flex items-center justify-between p-2 border rounded-full cursor-pointer border-neutral-700 text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
                             <div class="block">
@@ -58,8 +57,7 @@
 
                     <div class="">
                         <input type="radio" id="coach" name="role_id" value="1" class="hidden peer" required
-                            {{ Auth::user()->role->name === 'Coach' ? 'checked' : '' }}
-                            @click="selectedRole = 'Coach'" />
+                            {{ Auth::user()->role->name === 'Coach' ? 'checked' : '' }} />
                         <label for="coach"
                             class="inline-flex items-center justify-between p-2 border rounded-full cursor-pointer border-neutral-700 text-neutral-400 bg-neutral-800 peer-checked:text-lime-300 peer-checked:bg-neutral-700 peer-checked:border peer-checked:border-lime-500 hover:text-neutral-300 hover:bg-neutral-700">
                             <div class="block">
@@ -69,22 +67,42 @@
                     </div>
 
                     <div class="flex items-center justify-center mt-8">
-                        <x-primary-button type="submit" x-show="canSubmit">
+                        <x-primary-button id="submitButton" type="submit" class="cursor-pointer">
                             {{-- {{ __('Update Role') }} --}}
                             {{ __('Mettre à jour le rôle') }}
                         </x-primary-button>
                     </div>
                 </form>
                 <script>
-                    function roleForm() {
-                        return {
-                            currentRole: '{{ Auth::user()->role->name }}',
-                            selectedRole: '{{ Auth::user()->role->name }}',
-                            get canSubmit() {
-                                return this.selectedRole !== this.currentRole;
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentRoleId = {{ Auth::user()->role_id }};
+                        const radioButtons = document.querySelectorAll('input[name="role_id"]');
+                        const submitButton = document.getElementById('submitButton');
+
+                        function updateButtonState() {
+                            let isChecked = false;
+                            radioButtons.forEach(radio => {
+                                if (radio.checked && parseInt(radio.value) !== currentRoleId) {
+                                    isChecked = true;
+                                }
+                            });
+
+                            submitButton.disabled = !isChecked;
+                            if (isChecked) {
+                                submitButton.classList.remove('cursor-not-allowed', 'bg-lime-200');
+                                submitButton.classList.add('cursor-pointer');
+                            } else {
+                                submitButton.classList.add('cursor-not-allowed', 'bg-lime-200');
+                                submitButton.classList.remove('cursor-pointer');
                             }
                         }
-                    }
+
+                        radioButtons.forEach(radio => {
+                            radio.addEventListener('change', updateButtonState);
+                        });
+
+                        updateButtonState(); // Initialize state on page load
+                    });
                 </script>
             </div>
 
