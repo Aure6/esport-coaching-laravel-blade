@@ -14,6 +14,12 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body class="flex flex-col min-h-screen font-sans antialiased bg-neutral-900 text-neutral-200">

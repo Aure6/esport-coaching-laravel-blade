@@ -32,7 +32,8 @@
                 </div>
             </div> --}}
 
-            <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+            <div x-cloak x-show="tab === 'tab3'"
+                class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
                 @if (is_null(Auth::user()->role_id))
                     <div>Vous n'avez actuellement aucun rôle. Vous pouvez choisir un rôle.</div>
@@ -110,7 +111,8 @@
                 </script>
             </div>
 
-            <div x-show="tab === 'tab1'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+            <div x-cloak x-show="tab === 'tab1'"
+                class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <x-section-title>Rendez-vous</x-section-title>
 
                 <div class="card-body">
@@ -196,7 +198,7 @@
             </div>
 
             @if (Auth::user()->role->name == 'Coach')
-                <div x-show="tab === 'tab2'"
+                <div x-cloak x-show="tab === 'tab2'"
                     class="flex flex-col items-center justify-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm sm:w-fit bg-neutral-800 sm:rounded-lg">
                     <x-section-title class="self-start">Disponibilités</x-section-title>
                     <div class="self-start">
