@@ -34,16 +34,18 @@
 
             <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
+                @if (is_null(Auth::user()->role_id))
+                    <div>Vous pouvez choisir un rôle.</div>
+                @else
+                    <div>
+                        Vous êtes <span class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span> mais
+                        vous pouvez changez à tout moment de rôle. Gardez en tête que vous resterez
+                        <span class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span>
+                        pour les rendez-vous déjà planifiés avant votre changement de rôle.
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('user.updateRole') }}">
                     @csrf
-                    <div>Vous êtes <span class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span> mais
-                        vous pouvez
-                        changez à tout moment de rôle. Gardez
-                        en tête que vous resterez <span
-                            class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span> pour
-                        les rendez-vous déjà planifiés
-                        avant votre changement de rôle.
-                    </div>
                     <div class="">
                         <input type="radio" id="client" name="role_id" value="2" class="hidden peer" required
                             {{ Auth::user()->role->name === 'Client' ? 'checked' : '' }} />
