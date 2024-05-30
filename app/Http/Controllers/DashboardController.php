@@ -24,7 +24,6 @@ class DashboardController extends Controller
 
         if ($user->role->name === "Coach") {
             $availabilities = Availability::where('coach_id', $user->id)->get();
-            // dd($availabilities);
             return view('dashboard', compact('appointments', 'availabilities'));
         }
 
