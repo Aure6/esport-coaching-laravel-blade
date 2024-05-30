@@ -33,21 +33,15 @@ class DashboardController extends Controller
 
     public function updateRole(Request $request)
     {
-        // Validate the request...
         $request->validate([
             'role_id' => 'required|in:2,1', // replace 'client' and 'coach' with actual role IDs
         ]);
 
-        // Get the authenticated user...
         $user = Auth::user();
 
-        // Update the user's role...
         $user->role_id = $request->role_id;
-        // dd($request);
         $user->save();
-        // dd($request);
 
-        // Redirect the user...
         // return redirect()->route('dashboard')->with('status', 'Role updated successfully!');
         return redirect()->route('dashboard')->with('status', 'Rôle mis à jour avec succès!');
     }
