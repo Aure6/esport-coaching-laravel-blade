@@ -35,7 +35,7 @@
             <div x-show="tab === 'tab3'" class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
                 @if (is_null(Auth::user()->role_id))
-                    <div>Vous pouvez choisir un rôle.</div>
+                    <div>Vous n'avez actuellement aucun rôle. Vous pouvez choisir un rôle.</div>
                 @else
                     <div>
                         Vous êtes <span class="font-semibold">{{ strtolower(Auth::user()->role->name) }}</span> mais
