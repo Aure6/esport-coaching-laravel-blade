@@ -19,6 +19,7 @@ class DashboardController extends Controller
             ->orWhere('coach_id', $user->id)
             ->where('date', '>=', $now)
             ->orderBy('date', 'asc')
+            ->orderBy('start', 'asc')
             ->get();
 
         if ($user->role->name === "Coach") {

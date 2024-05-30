@@ -182,11 +182,13 @@
 
                     submitButton.disabled = !isChecked;
                     if (isChecked) {
-                        submitButton.classList.remove('cursor-not-allowed', 'bg-lime-200');
-                        submitButton.classList.add('cursor-pointer');
+                        submitButton.classList.remove('cursor-not-allowed', 'bg-lime-200', 'hover:bg-lime-200',
+                            'hover:text-black');
+                        submitButton.classList.add('cursor-pointer', 'hover:text-white');
                     } else {
-                        submitButton.classList.add('cursor-not-allowed', 'bg-lime-200');
-                        submitButton.classList.remove('cursor-pointer');
+                        submitButton.classList.add('cursor-not-allowed', 'bg-lime-200', 'hover:bg-lime-200',
+                            'hover:text-black');
+                        submitButton.classList.remove('cursor-pointer', 'hover:text-white');
                     }
                 }
 
@@ -212,6 +214,8 @@
                 hourCheckboxes.forEach(function(checkbox) {
                     checkbox.addEventListener('change', checkHourCheckboxes);
                 });
+
+                checkHourCheckboxes();
             </script>
             </section>
             <section class='p-6 bg-neutral-800 sm:rounded-xl'>

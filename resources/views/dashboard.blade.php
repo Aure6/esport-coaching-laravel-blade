@@ -89,11 +89,13 @@
 
                             submitButton.disabled = !isChecked;
                             if (isChecked) {
-                                submitButton.classList.remove('cursor-not-allowed', 'bg-lime-200');
-                                submitButton.classList.add('cursor-pointer');
+                                submitButton.classList.remove('cursor-not-allowed', 'bg-lime-200', 'hover:bg-lime-200',
+                                    'hover:text-black');
+                                submitButton.classList.add('cursor-pointer', 'hover:text-white');
                             } else {
-                                submitButton.classList.add('cursor-not-allowed', 'bg-lime-200');
-                                submitButton.classList.remove('cursor-pointer');
+                                submitButton.classList.add('cursor-not-allowed', 'bg-lime-200', 'hover:bg-lime-200',
+                                    'hover:text-black');
+                                submitButton.classList.remove('cursor-pointer', 'hover:text-white');
                             }
                         }
 
@@ -196,7 +198,7 @@
                     class="flex flex-col items-center justify-center max-w-sm p-6 mx-auto overflow-hidden shadow-sm sm:w-fit bg-neutral-800 sm:rounded-lg">
                     <x-section-title class="self-start">Disponibilités</x-section-title>
                     <div class="self-start">
-                        Un service dure une heure.
+                        Une session dure une heure.
                     </div>
                     <form method="POST" action="{{ route('availabilities.update') }}" class="">
                         @csrf
