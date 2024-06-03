@@ -276,7 +276,7 @@
                             <label for="game_id" class="block text-sm font-medium text-neutral-400">Sélectionnez un
                                 jeu</label>
                             <select id="game_id" name="game_id"
-                                class="block w-full mt-1 border bg-neutral-800 border-neutral-700 text-neutral-400">
+                                class="block w-full mt-1 border bg-neutral-800 border-neutral-700">
                                 @foreach ($games as $game)
                                     <option value="{{ $game->id }}"
                                         {{ Auth::user()->game_id == $game->id ? 'selected' : '' }}>
@@ -301,8 +301,8 @@
                     @csrf
                     <div class="mt-4">
                         <label for="bio" class="block text-sm font-medium text-neutral-400">Votre bio</label>
-                        <textarea id="bio" name="bio"
-                            class="block w-full mt-1 border bg-neutral-800 border-neutral-700 text-neutral-400" rows="15">{{ Auth::user()->bio }}</textarea>
+                        <textarea id="bio" name="bio" class="block w-full mt-1 border bg-neutral-800 border-neutral-700"
+                            rows="15">{{ Auth::user()->bio }}</textarea>
                     </div>
                     <div class="flex items-center justify-center mt-8">
                         <x-primary-button id="submitButton" type="submit" class="cursor-pointer">
