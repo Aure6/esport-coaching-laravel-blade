@@ -15,8 +15,10 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $now = Carbon::now();
-        $appointments = Appointment::where('client_id', $user->id)
-            ->orWhere('coach_id', $user->id)
+        $appointments = Appointment::where(function ($query) use ($user) {
+            $query->where('client_id', $user->id)
+                ->orWhere('coach_id', $user->id);
+        })
             ->where('date', '>=', $now)
             ->orderBy('date', 'asc')
             ->orderBy('start', 'asc')
