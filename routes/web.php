@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/appointments/destroy/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
     Route::post('/user/updateRole', [DashboardController::class, 'updateRole'])->name('user.updateRole');
+    Route::post('/user/update-bio', [DashboardController::class, 'updateBio'])->name('user.updateBio');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

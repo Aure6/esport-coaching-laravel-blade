@@ -8,7 +8,7 @@
     <div class="py-12">
         <div x-data="{ tab: localStorage.getItem('tab') || 'tab1' }" x-init="$watch('tab', val => localStorage.setItem('tab', val))" class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
             @if (session('success'))
-                <div class="p-6 mx-auto overflow-hidden text-white bg-green-500 sm:rounded-xl">
+                <div class="p-6 mx-auto overflow-hidden text-white bg-green-500 sm:rounded-xl" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
@@ -29,6 +29,9 @@
                         class="px-4 py-2 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
                         @click="tab = 'tab4'">Jeu</button>
                 @endif
+                <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tabBio' }"
+                    class="px-4 py-2 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
+                    @click="tab = 'tabBio'">Bio</button>
             </div>
 
             {{-- <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -291,6 +294,23 @@
                 </div>
             @endif
 
+            <div x-cloak x-show="tab === 'tabBio'"
+                class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+                <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Modifier bio</h3>
+                <form method="POST" action="{{ route('user.updateBio') }}">
+                    @csrf
+                    <div class="mt-4">
+                        <label for="bio" class="block text-sm font-medium text-neutral-400">Votre bio</label>
+                        <textarea id="bio" name="bio"
+                            class="block w-full mt-1 border bg-neutral-800 border-neutral-700 text-neutral-400" rows="15">{{ Auth::user()->bio }}</textarea>
+                    </div>
+                    <div class="flex items-center justify-center mt-8">
+                        <x-primary-button id="submitButton" type="submit" class="cursor-pointer">
+                            {{ __('Mettre à jour la bio') }}
+                        </x-primary-button>
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>

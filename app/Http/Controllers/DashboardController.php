@@ -49,4 +49,17 @@ class DashboardController extends Controller
         // return redirect()->route('dashboard')->with('status', 'Role updated successfully!');
         return redirect()->route('dashboard')->with('status', 'Rôle mis à jour avec succès!');
     }
+
+    public function updateBio(Request $request)
+    {
+        $request->validate([
+            'bio' => 'required|string|max:1000',
+        ]);
+
+        $user = Auth::user();
+        $user->bio = $request->input('bio');
+        $user->save();
+
+        return redirect()->back()->with('success', 'Votre bio a été mise à jour avec succès.');
+    }
 }
