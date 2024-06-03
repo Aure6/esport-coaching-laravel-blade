@@ -12,7 +12,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="flex p-2 text-sm font-medium text-center text-gray-400 sm:rounded-xl bg-neutral-800">
+            <div class="flex flex-wrap p-2 text-sm font-medium text-center text-gray-400 sm:rounded-xl bg-neutral-800">
                 <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab1' }"
                     class="inline-block p-4 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
                     @click="tab = 'tab1'">Rendez-vous</button>
@@ -24,6 +24,11 @@
                 <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab3' }"
                     class="p-4 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
                     @click="tab = 'tab3'">Rôle</button>
+                @if (Auth::user()->role->name === 'Coach')
+                    <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab4' }"
+                        class="px-4 py-2 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"
+                        @click="tab = 'tab4'">Jeu</button>
+                @endif
             </div>
 
             {{-- <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -246,28 +251,47 @@
                         <div class="flex justify-center">
                             <x-primary-button type="submit">Enregistrer les disponibilités</x-primary-button>
                         </div>
-                        <script>
-                            // const selectElements = document.querySelectorAll('select');
-
-                            // selectElements.forEach(function(selectElement) {
-                            //     selectElement.addEventListener('change', function() {
-                            //         if (this.disabled) {
-                            //             this.classList.remove('text-black');
-                            //             this.classList.remove('cursor-default');
-                            //             this.classList.add('text-gray-800');
-                            //             this.classList.add('cursor-not-allowed');
-                            //         } else {
-                            //             this.classList.remove('text-gray-800');
-                            //             this.classList.remove('cursor-not-allowed');
-                            //             this.classList.add('text-black');
-                            //             this.classList.add('cursor-default');
-                            //         }
-                            //     });
-                            // });
-                        </script>
                     </form>
                 </div>
             @endif
+
+            @if (Auth::user()->role->name === 'Coach')
+                <div x-cloak x-show="tab === 'tab4'"
+                    class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+                    <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Jeu</h3>
+                    @if (is_null(Auth::user()->game_id))
+                        <div>Vous n'avez actuellement aucun jeu. Vous pouvez choisir un jeu.</div>
+                    @else
+                        <div>
+                            Vous avez actuellement sélectionné le jeu <span
+                                class="font-semibold">{{ Auth::user()->game->name }}</span>.
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('user.updateGame') }}">
+                        @csrf
+                        <div class="mt-4">
+                            <label for="game_id" class="block text-sm font-medium text-neutral-400">Sélectionnez un
+                                jeu</label>
+                            <select id="game_id" name="game_id"
+                                class="block w-full mt-1 border bg-neutral-800 border-neutral-700 text-neutral-400">
+                                @foreach ($games as $game)
+                                    <option value="{{ $game->id }}"
+                                        {{ Auth::user()->game_id == $game->id ? 'selected' : '' }}>
+                                        {{ $game->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-center mt-8">
+                            <x-primary-button id="submitButton" type="submit" class="cursor-pointer">
+                                {{ __('Mettre à jour le jeu') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            @endif
+
+
         </div>
     </div>
 </x-app-layout>

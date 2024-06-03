@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Availability;
+use App\Models\Game;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,8 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        $games = Game::all();
 
         $now = Carbon::now();
         $appointments = Appointment::where(function ($query) use ($user) {
@@ -26,7 +29,7 @@ class DashboardController extends Controller
 
         if ($user->role->name === "Coach") {
             $availabilities = Availability::where('coach_id', $user->id)->get();
-            return view('dashboard', compact('appointments', 'availabilities'));
+            return view('dashboard', compact('appointments', 'availabilities', 'games'));
         }
 
         return view('dashboard', compact('appointments'));

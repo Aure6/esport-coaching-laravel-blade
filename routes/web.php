@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/coaches/show/{id}', [CoachController::class, 'show'])->name('coaches.show');
     Route::post('/availabilities.update', [AvailabilityController::class, 'update'])->name('availabilities.update');
+    Route::post('/user/update-game', [CoachController::class, 'updateGame'])->name('user.updateGame');
 
     Route::post('/{coach_id}/appointments/store', [AppointmentController::class, 'store'])->name('appointments.store'); // The auth middleware in Laravel is designed to redirect unauthenticated users to the login page. Once the user is authenticated, Laravel will redirect the user back to the original destination. So the store method will not be executed.
     Route::delete('/appointments/destroy/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');

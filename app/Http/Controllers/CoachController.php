@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CoachController extends Controller
@@ -63,5 +64,18 @@ class CoachController extends Controller
             'coach' => $coach,
             'availabilities' => $availabilities,
         ]);
+    }
+
+    public function updateGame(Request $request)
+    {
+        $request->validate([
+            'game_id' => 'required|exists:games,id',
+        ]);
+
+        $user = Auth::user();
+        $user->game_id = $request->game_id;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Jeu mis à jour avec succès.');
     }
 }
