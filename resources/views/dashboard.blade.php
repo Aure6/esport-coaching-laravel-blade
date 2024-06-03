@@ -41,7 +41,7 @@
             </div> --}}
 
             <div x-cloak x-show="tab === 'tab3'"
-                class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+                class="max-w-3xl p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Rôle</h3>
                 @if (is_null(Auth::user()->role_id))
                     <div>Vous n'avez actuellement aucun rôle. Vous pouvez choisir un rôle.</div>
@@ -260,7 +260,7 @@
 
             @if (Auth::user()->role->name === 'Coach')
                 <div x-cloak x-show="tab === 'tab4'"
-                    class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+                    class="max-w-3xl p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                     <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Jeu</h3>
                     @if (is_null(Auth::user()->game_id))
                         <div>Vous n'avez actuellement aucun jeu. Vous pouvez choisir un jeu.</div>
@@ -295,7 +295,7 @@
             @endif
 
             <div x-cloak x-show="tab === 'tabBio'"
-                class="p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
+                class="max-w-3xl p-6 mx-auto overflow-hidden shadow-sm bg-neutral-800 sm:rounded-lg">
                 <h3 class="text-2xl font-semibold leading-tight uppercase text-lime-500">Modifier bio</h3>
                 <form method="POST" action="{{ route('user.updateBio') }}">
                     @csrf
