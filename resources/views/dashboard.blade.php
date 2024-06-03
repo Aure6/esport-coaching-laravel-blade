@@ -12,6 +12,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('info'))
+                <div class="p-6 mx-auto overflow-hidden text-white bg-blue-500 sm:rounded-xl" role="info">
+                    {{ session('info') }}
+                </div>
+            @endif
             <div class="flex flex-wrap p-2 text-sm font-medium text-center text-gray-400 sm:rounded-xl bg-neutral-800">
                 <button :class="{ 'bg-lime-500 text-neutral-900': tab === 'tab1' }"
                     class="inline-block p-4 duration-200 rounded-lg hover:bg-neutral-700 hover:text-neutral-200"

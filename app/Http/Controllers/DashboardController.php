@@ -57,9 +57,14 @@ class DashboardController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->bio = $request->input('bio');
-        $user->save();
+        $newBio = $request->input('bio');
 
-        return redirect()->back()->with('success', 'Votre bio a été mise à jour avec succès.');
+        if ($user->bio == $newBio) {
+            return redirect()->back()->with('info', "La bio entrée est identique à l'ancienne.");
+        } else {
+            $user->bio = $newBio;
+            $user->save();
+            return redirect()->back()->with('success', 'Votre bio a été mise à jour avec succès.');
+        }
     }
 }
