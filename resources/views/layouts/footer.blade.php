@@ -10,7 +10,7 @@
     <div>© 2024 JVCoaching. Tous droits réservés.</div>
 
     <a href="{{ route('legal.notice') }}"
-        class="hover:text-lime-500 focus:text-lime-300 focus:ring-2 focus:ring-offset-2 focus:ring-lime-500">
+        class="hover:text-lime-500 focus:text-lime-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500 rounded-xl">
         Mentions légales
     </a>
 </footer>

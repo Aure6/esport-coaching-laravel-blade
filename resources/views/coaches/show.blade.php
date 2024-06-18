@@ -48,8 +48,8 @@
                 </section>
                 <section class="gap-4 space-y-6 text-lg text-white md:col-span-2 ">
                     <section class="p-6 bg-neutral-800 sm:rounded-xl">
-                        <x-section-title
-                            class="text-2xl font-semibold leading-tight uppercase text-lime-500">Disponibilités</x-section-title>
+                        <x-section-title class="text-2xl font-semibold leading-tight uppercase text-lime-500">Prendre
+                            rendez-vous</x-section-title>
                         @if (!Auth::check())
                             <div class="p-2 text-white bg-orange-500 rounded-xl">Vous devez être connecter afin
                                 d'effectuer une

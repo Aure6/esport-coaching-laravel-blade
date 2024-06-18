@@ -44,7 +44,7 @@
         </div>
         <div class="mx-auto space-y-4 sm:px-6 lg:px-8">
             <x-section-title class="p-6">Les meilleurs coachs</x-section-title>
-            <div class="grid grid-cols-1 gap-6 overflow-hidden sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+            <div class="grid grid-cols-1 gap-6 p-4 overflow-hidden sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
                 {{-- <Link :href="route('games.show', { gameId: game.id, })" v-for="game in  games" :key="game.id"
                         class="block p-6 text-2xl text-white uppercase duration-200 bg-neutral-700 hover:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500">
                     {{ game.name }}
