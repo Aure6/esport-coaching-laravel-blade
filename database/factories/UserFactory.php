@@ -44,7 +44,8 @@ class UserFactory extends Factory
             // 'role_id' => Role::inRandomOrder()->first()->id,
             'role_id' => Role::get()->random()->id,
 
-            'avatar_path' => 'avatar_placeholder.png',
+            // 'avatar_path' => 'avatar_placeholder.png',
+            'avatar_path' => $this->faker->randomElement(['avatar1.jpg', 'avatar2.jpg', 'avatar3.jpg', 'avatar4.jpg']),
 
             // coach stuff
             'game_id' => Game::get()->random()->id,
