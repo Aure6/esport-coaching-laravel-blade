@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-neutral-100">
             {{ __('Avatar') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-1 text-sm text-neutral-400">
             {{ __('Here you can change your avatar. It will be displayed on your profile.') }}
         </p>
     </header>
@@ -16,13 +16,13 @@
             <x-avatar :user="$user" class="w-20 h-20"></x-avatar>
 
             <div class="">
-                <label for="avatar" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                <label for="avatar" class="block text-sm font-medium text-neutral-200">
                     {{ __('Avatar') }}
                 </label>
 
                 <div class="mt-1">
                     <input type="file" name="avatar" id="avatar"
-                        class="block w-full rounded-md shadow-sm sm:text-sm dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-opacity-50 dark:focus:ring-offset-gray-800 dark:focus:ring-offset-opacity-50 dark:ring-offset-gray-800 dark:ring-offset-opacity-50 dark:ring-gray-500 dark:ring-opacity-50" />
+                        class="block w-full rounded-md shadow-sm sm:text-sm dark:bg-neutral-700 dark:border-neutral-700 dark:text-neutral-200 dark:focus:ring-neutral-500 dark:focus:border-neutral-500 dark:placeholder-neutral-400 dark:focus:ring-opacity-50 dark:focus:ring-offset-neutral-800 dark:focus:ring-offset-opacity-50 dark:ring-offset-neutral-800 dark:ring-offset-opacity-50 dark:ring-neutral-500 dark:ring-opacity-50" />
                 </div>
 
                 <x-input-error :messages="$errors->get('avatar')" class="mt-2" />
@@ -34,7 +34,7 @@
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400">
+                    class="text-sm text-neutral-400">
                     {{ __('Saved.') }}
                 </p>
             @endif
