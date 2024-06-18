@@ -8,7 +8,8 @@
     <div class="py-12">
         <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="max-w-2xl mx-auto">
-                <p><strong>Droit d'auteur<br></strong>Le site <a href="/ecole/../">www.aurelienschmit.be</a> constitue
+                <p><strong>Droit d'auteur<br></strong>Le site <a
+                        href="http://www.aurelienschmit.be/">www.aurelienschmit.be</a> constitue
                     une création protégée par le droit d'auteur. Les éléments de mon site sont protégés par le droit
                     d'auteur. Toute copie, adaptation, traduction,
                     arrangement, communication au public, location et autre exploitation, modification de tout ou
@@ -29,14 +30,13 @@
                     pouvant résulter de l'utilisation des informations et indications
                     fournies.<br><br><strong>Coordonnées<br></strong>Vous pouvez me contacter par Email à&nbsp;<span
                         id="cloak115585ad28f24f1b4fce803bd4f8d520"><a
-                            href="mailto:aurelien.@ifosupwavre.be">aurelien.@ifosup.wavre.be</a></span>
+                            href="mailto:aurelien.schmit@ifosupwavre.be">aurelien.schmit@ifosup.wavre.be</a></span>
                 </p>
                 <div>
-                    <td>à l'<strong>IFOSUP </strong>: <a href="http://www.ifosupwavre.be/"><span
-                                style="text-decoration: underline;"><span
-                                    class="text-white hover:text-lime-500 focus:text-lime-300 ">www.ifosup.wavre.be</span></span></a><br>
-                        <div align="left">Rue de la Limite, 6</div>
-                        1300 Wavre<br>010/22.20.26
+                    <td>à <a href="http://www.aurelienschmit.be/"><span style="text-decoration: underline;"><span
+                                    class="text-white hover:text-lime-500 focus:text-lime-300 ">www.aurelienschmit.be</span></span></a><br>
+                        <div align="left">Clos de la Rivière, 6</div>
+                        1340 Ottignies-Louvain-La-Neuve<br>+3242682667
                     </td>
                 </div>
                 <p><strong>Hébergeur</strong><br>Hostinger<br>2 rue Kellermann<br>59100 Roubaix - France. <br><a
