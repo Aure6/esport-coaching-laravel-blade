@@ -14,7 +14,7 @@
                     </Link> --}}
                 @foreach ($games as $game)
                     <a href="{{ route('games.show', $game->id) }}"
-                        class="block p-6 text-2xl text-white uppercase duration-200 sm:rounded-xl bg-neutral-700 hover:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 hover:scale-105">
+                        class="block p-6 text-2xl text-white uppercase duration-200 rounded-xl bg-neutral-700 hover:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 hover:scale-105">
                         {{ $game->name }}
                     </a>
                 @endforeach
